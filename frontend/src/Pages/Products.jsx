@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import BookContext from "../Context/GiftCardContext"
 
 export default function Products() {
-    const {giftcards,setSelectedCategory,setCart,setWishList} = useContext(BookContext)
+    const {giftcards,setSelectedCategory,setCart,setWishList,searchedCard,searchError,loading} = useContext(BookContext)
      const {category} = useParams()
 
     useEffect(()=>{setSelectedCategory(category)},[category])
@@ -19,23 +19,34 @@ export default function Products() {
       setWishList((prev)=>[...prev,card])
     }
 
+    // function showProductDetailsHandler(card) {
+
+    // }
+
+    const cardsToShow = searchedCard ? searchedCard : giftcards
+
+    if (loading) {
+      return <p>Loading gift cards ...</p>
+    }
+
 
     return (
         <>
-        {giftcards.map((card)=>(
+        {searchError && <p className="text-danger">{searchError}</p>}
+        {cardsToShow.map((card)=>(
                 <div className="card mb-3" style={{ maxWidth: "540px" }} key={card._id}>
     <div className="row g-0">
       <div className="col-md-4">
         <img
           src={card.giftCardImage}
           className="img-fluid rounded-start"
-          alt={card.giftCardCategory}
+          alt={card.giftCardTitle}
         />
       </div>
 
       <div className="col-md-8">
         <div className="card-body">
-          <h5 className="card-title"> Category : {card.giftCardCategory}</h5>
+          <h5 className="card-title">{card.giftCardTitle}</h5>
 
           <p className="card-text">
             Term and conditions : {card.redemptionTerms}
@@ -48,6 +59,7 @@ export default function Products() {
           </p>
           <button onClick={()=>addToWishListHandler(card)}>Add to Wishlist</button>
           <button onClick={()=>addToCardHandler(card)}>Add to Cart</button>
+          {/* <button onClick={()=>showProductDetailsHandler(card)}>Show Product details</button> */}
           
         </div>
       </div>

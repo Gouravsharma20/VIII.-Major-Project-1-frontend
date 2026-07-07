@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 
-import { Link } from "react-router-dom"
+import { Link,useLocation } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,22 +8,39 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import BookContext from "../Context/GiftCardContext";
 
+// import {categories} from "../Pages/Home.jsx"
+
 
 // import Wishlist from "../Pages/Wishlist"
 
 export default function Navigation(){
 
-  const {cart,wishList} = useContext(BookContext) 
+  const {cart,wishList,categories, searchGiftCardByTitle,searchCategory} = useContext(BookContext)
+  const [searchTerm, setSearchTerm] = useState("")
+  const location = useLocation()
+
+  async function handleSearch(e) {
+    e.preventDefault()
+    if (location.pathname === "/") {   
+      searchCategory(searchTerm)
+    } else {
+      await searchGiftCardByTitle(searchTerm)
+    }
+  }
+
+  
 
 
     return (
         <nav className="navbar bg-body-tertiary">
   <div className="container-fluid">
     <Link to = "/" className="navbar-brand">GiftMart</Link>
-    <form className="d-flex" role="search">
-      <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+    <form className="d-flex" role="search" onSubmit={handleSearch}>
+      <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
       <button className="btn btn-outline-success" type="submit">Search</button>
     </form>
+
+    
 
 
 
@@ -114,7 +131,7 @@ export default function Navigation(){
 
     <div className="col-md-8">
       <div className="card-body">
-        <h5 className="card-title">Card title</h5>
+        <h5 className="card-title">{item.giftCardTitle}</h5>
 
         <p className="card-text">
           {item.redemptionTerms}
