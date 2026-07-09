@@ -21,7 +21,9 @@ export default function CartItems() {
       navigate("/productDetails")
     }
 
-    return (
+    return cart.length === 0 ? (
+    <p>Cart is empty</p>
+) : (
         cart.map((item,index) => (
       <li key={index}>
         <div className="card mb-3" style={{ maxWidth: "540px" }}>

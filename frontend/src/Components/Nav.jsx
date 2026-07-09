@@ -7,13 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import GiftCardContext from "../Context/GiftCardContext";
-// import Wishlist from "./Wishlist";
-import CartItems from "./CartItems";
 
-// import {categories} from "../Pages/Home.jsx"
-
-
-// import Wis list from "../Pages/Wishlist"
 
 export default function Navigation(){
 
@@ -48,7 +42,7 @@ export default function Navigation(){
 
 
 
-    <li className="nav-item dropdown">
+    {/* <li className="nav-item dropdown">
     <a
       className="nav-link dropdown-toggle"
       href="#"
@@ -57,9 +51,11 @@ export default function Navigation(){
       aria-expanded="false"
     >
       Wishlist ({wishList.length})
-    </a>
+    </a> */}
 
-    <ul className="dropdown-menu">
+    <Link className="btn btn-primary" to={"/wishlist"}>Wishlist ({wishList.length})</Link>
+
+    {/* <ul className="dropdown-menu">
       {wishList.length === 0 ? (
         <li>
           <span className="dropdown-item">
@@ -68,11 +64,10 @@ export default function Navigation(){
         </li>
       ) : (
         <Link to={"/wishlist"}>Go to Wishlist</Link>
-        // <Wishlist/>
       )}
-    </ul>
+    </ul> */}
 
-  </li>
+  {/* </li> */}
 
 
   
@@ -82,7 +77,7 @@ export default function Navigation(){
 
     <Link to = "/login" className="nav-link ms-1 btn-btn-primary">login</Link>
     {/* <Link to = "/cart" className="nav-link ms-3">Cart</Link> */}
-    <li className="nav-item dropdown">
+    {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Cart ({totalCartQuantity})
           </a>
@@ -94,7 +89,9 @@ export default function Navigation(){
     // <CartItems/>
 )}
           </ul>
-        </li>
+        </li> */}
+
+        <Link className="btn btn-primary" to={"/cart"}> Cart ({totalCartQuantity})</Link>
   </div>
 </nav>  
     )
