@@ -1,4 +1,4 @@
-  import { useEffect, useState } from 'react'
+  import { useCallback, useEffect, useState } from 'react'
   import './App.css'
 
   import BookContext from './Context/GiftCardContext.jsx'
@@ -10,7 +10,6 @@
   import Wishlist from './Components/Wishlist.jsx'
 
   import Nav from "./Components/Nav.jsx"
-
   import Login from './Pages/Login.jsx'
   import Products from './Pages/Products.jsx'
 
@@ -61,7 +60,7 @@ import CartItems from './Components/CartItems.jsx'
 
       const categories = [...new Set(giftcards.map((card)=>card.giftCardCategory))]
 
-      function searchCategory(terms) {
+      const searchCategory = useCallback((terms) => {
         const match = categories.find((cat)=>cat.toLowerCase() === terms.toLowerCase())
         if (match) {
         setHomeSearchResult(match)
@@ -70,15 +69,15 @@ import CartItems from './Components/CartItems.jsx'
         setHomeSearchResult(null)
         setHomeSearchNotFound(true)
       }
-      }
+      },[categories]) 
 
-      function clearSearch() {
+      const clearSearch = useCallback(() => {
         setSearchedCard(null)
         setSearchError("")
         setHomeSearchResult(null)
         setHomeSearchNotFound(false)
 
-      }
+      },[])
 
       async function searchGiftCardByTitle(title) {
         setLoading(true)

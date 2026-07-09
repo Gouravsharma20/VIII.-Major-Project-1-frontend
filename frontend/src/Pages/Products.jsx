@@ -80,12 +80,13 @@ export default function Products() {
                 <div className="card mb-3" style={{ maxWidth: "540px" }} key={card._id}>
     <div className="row g-0">
       <div className="col-md-4">
-        <img
-          src={card.giftCardImage}
-          alt={card.giftCardTitle}
-          className="img-fluid rounded-start mx-auto d-block mt-4 length-100 width=100"
-        />
-      </div>
+  <img
+    src={card.giftCardImage}
+    alt={card.giftCardTitle}
+    className="rounded-start mx-auto d-block mt-4"
+    style={{ height: "150px", width: "150px", objectFit: "cover" }}
+  />
+</div>
       
       
 

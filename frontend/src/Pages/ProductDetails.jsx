@@ -28,30 +28,46 @@
 
       return (
           <div className="d-flex justify-content-center align-items-center min-vh-10 p-5">
-              <div className="card" style={{ width: "18rem" }}>
-    <img src={productDetail.giftCardImage} className="card-img-top" alt={productDetail.giftCardTitle} />
-    <div className="card-body">
-      <h5 className="card-title">{productDetail.giftCardTitle}</h5>
-      <p className="card-text">
-        {productDetail.redemptionTerms}
-      </p>
-    </div>
+  <div className="card" style={{ width: "45rem" }}>
+    <div className="row g-0">
+      <div className="col-md-4">
+        <img
+          src={productDetail.giftCardImage}
+          className="img-fluid rounded-start h-100"
+          style={{ objectFit: "cover" }}
+          alt={productDetail.giftCardTitle}
+        />
+      </div>
+      <div className="col-md-8">
+        <div className="card-body">
+          <h5 className="card-title">{productDetail.giftCardTitle}</h5>
+          <p className="card-text">{productDetail.redemptionTerms}</p>
+        </div>
 
-    <ul className="list-group list-group-flush">
-      <li className="list-group-item">Card:{productDetail.giftCardNumber}</li>
-      <li className="list-group-item">Pin:{productDetail.giftCardPin}</li>
-      <li className="list-group-item">Type:{productDetail.redemptionType}</li>
-      <li className="list-group-item">Expiry:{productDetail.giftCardexpiryDate}</li>
-      <li className="list-group-item">Balance:{productDetail.giftCardBalance}</li>
-      
-    </ul>
-    <div class="card-body">
-      <img src={wishlistIcon} length="30" width="30" pl-6 style={{cursor:"pointer"}} onClick={()=>addToWishListHandler(productDetail)}/>
-      {/* <button onClick={addToWishListHandler} class="card-link">Add to Wishlist</button> */}
-      <button onClick={()=>addToCardHandler(productDetail)} class="card-link">Add to Cart</button>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">Card:{productDetail.giftCardNumber}</li>
+          <li className="list-group-item">Pin:{productDetail.giftCardPin}</li>
+          <li className="list-group-item">Type:{productDetail.redemptionType}</li>
+          <li className="list-group-item">Expiry:{productDetail.giftCardexpiryDate}</li>
+          <li className="list-group-item">Balance:{productDetail.giftCardBalance}</li>
+        </ul>
+
+        <div className="card-body">
+          <img
+            src={wishlistIcon}
+            height="30"
+            width="30"
+            style={{ cursor: "pointer" }}
+            onClick={() => addToWishListHandler(productDetail)}
+          />
+          <button onClick={() => addToCardHandler(productDetail)} className="card-link">
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-          </div>
+</div>
           
       )
   }
