@@ -3,6 +3,7 @@ import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
 
 import deleteIcon from "../Assets/delete.svg"
+import { Link } from "react-router-dom";
 
 export default function CartItems() {
 
@@ -43,6 +44,7 @@ export default function CartItems() {
             Redemable:{item.redemptionType}
           </small>
         </p>
+        <Link to={"/cart"}>Go to Cart</Link>
       </div>
     </div>
   </div>

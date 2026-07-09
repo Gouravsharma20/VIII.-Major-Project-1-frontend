@@ -1,6 +1,8 @@
 import { useContext } from "react"
 import GiftCardContext from "../Context/GiftCardContext"
 
+import { Link } from "react-router-dom"
+
 import deleteIcon from "../Assets/delete.svg"
 
 export default function Wishlist(){
@@ -31,6 +33,7 @@ export default function Wishlist(){
                                 <h5 className="card-title">{item.giftCardTitle}</h5>
                                 
                                 <p className="card-text">Redemable: {item.redemptionType}</p>
+                                <Link to={"/wishList"}>Go to WishList</Link>
                             </div>
                         </div>
                     </div>

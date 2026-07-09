@@ -15,6 +15,7 @@
   import Products from './Pages/Products.jsx'
 
   import ProductDetails from './Pages/ProductDetails.jsx'
+import CartItems from './Components/CartItems.jsx'
 
 
   function App() {
@@ -173,6 +174,8 @@
         <Route path="/wishlist" element={<Wishlist/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/productDetails' element={<ProductDetails/>}/>
+        <Route path='/cart' element={<CartItems/>}/>
+        <Route path='/wishList' element={<Wishlist/>}/>
         
       </Routes>
       </BrowserRouter>
