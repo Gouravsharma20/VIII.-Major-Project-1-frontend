@@ -1,16 +1,28 @@
 import { useContext } from "react"
 import GiftCardContext from "../Context/GiftCardContext"
 
-import { Link } from "react-router-dom"
 
 import deleteIcon from "../Assets/delete.svg"
 
+import { useNavigate } from "react-router-dom"
+
+
+
 export default function Wishlist(){
-    const { wishList,removeFromWishList } = useContext(GiftCardContext)
+    const { wishList,removeFromWishList,setProductDetail } = useContext(GiftCardContext)
 
     async function handleDelete(itemId) {
         removeFromWishList(itemId)
     }
+
+    const navigate = useNavigate()
+
+    function showProductDetailsHandler(card) {
+      setProductDetail(card)
+      navigate("/productDetails")
+    }
+
+    
 
     return (
         <>
@@ -33,7 +45,7 @@ export default function Wishlist(){
                                 <h5 className="card-title">{item.giftCardTitle}</h5>
                                 
                                 <p className="card-text">Redemable: {item.redemptionType}</p>
-                                <Link to={"/productDetails"}>see Product details</Link>
+                                <button onClick = {()=>showProductDetailsHandler(item)}>Show Product Details</button>
                             </div>
                         </div>
                     </div>

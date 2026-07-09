@@ -3,14 +3,22 @@ import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
 
 import deleteIcon from "../Assets/delete.svg"
-import { Link } from "react-router-dom";
+
+import {useNavigate} from "react-router-dom"
 
 export default function CartItems() {
 
-    const {cart,removeFromCart} = useContext(GiftCardContext)
+    const {cart,removeFromCart,setProductDetail} = useContext(GiftCardContext)
 
     function handleDelete(itemId) {
       removeFromCart(itemId)
+    }
+
+    const navigate = useNavigate()
+
+    function showProductDetailsHandler(card) {
+      setProductDetail(card)
+      navigate("/productDetails")
     }
 
     return (
@@ -44,7 +52,7 @@ export default function CartItems() {
             Redemable:{item.redemptionType}
           </small>
         </p>
-        <Link to={"/productDetails"}>see Product details</Link>
+        <button onClick = {()=>showProductDetailsHandler(item)}>Show Product Details</button>
       </div>
     </div>
   </div>
