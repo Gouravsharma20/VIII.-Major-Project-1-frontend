@@ -33,7 +33,7 @@ export default function Wishlist(){
                                 <h5 className="card-title">{item.giftCardTitle}</h5>
                                 
                                 <p className="card-text">Redemable: {item.redemptionType}</p>
-                                <Link to={"/wishList"}>Go to WishList</Link>
+                                <Link to={"/productDetails"}>see Product details</Link>
                             </div>
                         </div>
                     </div>

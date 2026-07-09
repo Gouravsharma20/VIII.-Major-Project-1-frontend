@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import GiftCardContext from "../Context/GiftCardContext";
-import Wishlist from "./Wishlist";
+// import Wishlist from "./Wishlist";
 import CartItems from "./CartItems";
 
 // import {categories} from "../Pages/Home.jsx"
@@ -67,7 +67,8 @@ export default function Navigation(){
           </span>
         </li>
       ) : (
-        <Wishlist/>
+        <Link to={"/wishlist"}>Go to Wishlist</Link>
+        // <Wishlist/>
       )}
     </ul>
 
@@ -89,7 +90,8 @@ export default function Navigation(){
             {cart.length === 0 ? (
     <li><span className="dropdown-item">Cart is empty</span></li>
 ) : (
-    <CartItems/>
+  <Link to={"/cart"}>Go to Cart</Link>
+    // <CartItems/>
 )}
           </ul>
         </li>

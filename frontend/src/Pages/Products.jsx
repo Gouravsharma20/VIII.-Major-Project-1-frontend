@@ -82,8 +82,8 @@ export default function Products() {
       <div className="col-md-4">
         <img
           src={card.giftCardImage}
-          className="img-fluid rounded-start"
           alt={card.giftCardTitle}
+          className="img-fluid rounded-start mx-auto d-block mt-4 length-100 width=100"
         />
       </div>
       

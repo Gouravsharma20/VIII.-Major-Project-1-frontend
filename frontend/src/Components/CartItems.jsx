@@ -44,7 +44,7 @@ export default function CartItems() {
             Redemable:{item.redemptionType}
           </small>
         </p>
-        <Link to={"/cart"}>Go to Cart</Link>
+        <Link to={"/productDetails"}>see Product details</Link>
       </div>
     </div>
   </div>
