@@ -1,6 +1,6 @@
 import { createContext } from "react"
 
-const BookContext = createContext()
+const GiftCardContext = createContext()
 
-export default BookContext
+export default GiftCardContext
 

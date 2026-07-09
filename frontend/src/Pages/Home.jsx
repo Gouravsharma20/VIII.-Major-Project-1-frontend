@@ -5,11 +5,12 @@
   import { Link } from "react-router-dom"
 
   export default function Home(){
-    const {giftcards,setSelectedCategory,categories,homeSearchResult, homeSearchNotFound,loading} = useContext(BookContext)
+    const {giftcards,setSelectedCategory,categories,homeSearchResult, homeSearchNotFound,loading,clearSearch} = useContext(BookContext)
     // const category = [...new Set(giftcards.map((card)=>card.giftCardCategory))]
     useEffect(() => {
     setSelectedCategory("")
-}, [])
+    clearSearch()
+}, [setSelectedCategory, clearSearch])
 
         const listToShow = homeSearchNotFound ? [] : homeSearchResult ?  [homeSearchResult] : categories
 

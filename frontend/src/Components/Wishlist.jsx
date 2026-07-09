@@ -1,23 +1,17 @@
-// import {wishList,setWishList} from "../Context/GiftCardContext"
-
-
-// export default function Wishlist(){
-//     return (
-//         <>
-//         <h2>mai toh wishlist hu</h2>
-//         </>
-//     )
-// }
-
 import { useContext } from "react"
-import BookContext from "../Context/GiftCardContext"
+import GiftCardContext from "../Context/GiftCardContext"
+
+import deleteIcon from "../Assets/delete.svg"
 
 export default function Wishlist(){
-    const { wishList } = useContext(BookContext)
+    const { wishList,removeFromWishList } = useContext(GiftCardContext)
+
+    async function handleDelete(itemId) {
+        removeFromWishList(itemId)
+    }
 
     return (
         <>
-        <h2>mai toh wishlist hu</h2>
         {wishList.length === 0 ? (
             <p>No items in wishlist</p>
         ) : (
@@ -28,13 +22,15 @@ export default function Wishlist(){
                             <img
                                 src={item.giftCardImage}
                                 className="img-fluid rounded-start"
-                                alt={item.giftCardCategory}
+                                alt={item.giftCardTitle}
                             />
                         </div>
                         <div className="col-md-8">
-                            <div className="card-body">
-                                <h5 className="card-title">{item.giftCardCategory}</h5>
-                                <p className="card-text">{item.redemptionTerms}</p>
+                            <div className="card-body p-2">
+                                <img src={deleteIcon} alt="delete" className="float-end" width="20" height="20" style={{cursor: "pointer"}} onClick={() => handleDelete(item._id)}/>
+                                <h5 className="card-title">{item.giftCardTitle}</h5>
+                                
+                                <p className="card-text">Redemable: {item.redemptionType}</p>
                             </div>
                         </div>
                     </div>
