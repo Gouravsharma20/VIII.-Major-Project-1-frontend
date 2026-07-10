@@ -42,32 +42,11 @@ export default function Navigation(){
 
 
 
-    {/* <li className="nav-item dropdown">
-    <a
-      className="nav-link dropdown-toggle"
-      href="#"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      Wishlist ({wishList.length})
-    </a> */}
+    
 
     <Link className="btn btn-primary" to={"/wishlist"}>Wishlist ({wishList.length})</Link>
 
-    {/* <ul className="dropdown-menu">
-      {wishList.length === 0 ? (
-        <li>
-          <span className="dropdown-item">
-            No item is available in wishlist
-          </span>
-        </li>
-      ) : (
-        <Link to={"/wishlist"}>Go to Wishlist</Link>
-      )}
-    </ul> */}
-
-  {/* </li> */}
+    
 
 
   
@@ -76,20 +55,7 @@ export default function Navigation(){
 
 
     <Link to = "/login" className="nav-link ms-1 btn-btn-primary">login</Link>
-    {/* <Link to = "/cart" className="nav-link ms-3">Cart</Link> */}
-    {/* <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cart ({totalCartQuantity})
-          </a>
-          <ul className="dropdown-menu">
-            {cart.length === 0 ? (
-    <li><span className="dropdown-item">Cart is empty</span></li>
-) : (
-  <Link to={"/cart"}>Go to Cart</Link>
-    // <CartItems/>
-)}
-          </ul>
-        </li> */}
+    
 
         <Link className="btn btn-primary" to={"/cart"}> Cart ({totalCartQuantity})</Link>
   </div>

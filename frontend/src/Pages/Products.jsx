@@ -23,7 +23,6 @@ export default function Products() {
 
     function addToCardHandler(card) {
         addToCart(card)
-
     }
 
     function addToWishListHandler(card) {

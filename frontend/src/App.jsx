@@ -13,8 +13,13 @@
   import Login from './Pages/Login.jsx'
   import Products from './Pages/Products.jsx'
 
+  import AdressPage from './Pages/AdressPage.jsx'
+
   import ProductDetails from './Pages/ProductDetails.jsx'
-import CartItems from './Components/CartItems.jsx'
+  import CartItems from './Components/CartItems.jsx'
+
+  import SuccessPage from './Pages/SuccessPage.jsx'
+import ViewOrders from './Components/ViewOrders.jsx'
 
 
   function App() {
@@ -175,6 +180,9 @@ import CartItems from './Components/CartItems.jsx'
         <Route path='/productDetails' element={<ProductDetails/>}/>
         <Route path='/cart' element={<CartItems/>}/>
         <Route path='/wishList' element={<Wishlist/>}/>
+        <Route path='/adress' element={<AdressPage/>}/>
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path='/viewOrders' element={<ViewOrders/>}/>
         
       </Routes>
       </BrowserRouter>

@@ -6,7 +6,7 @@
 
 
   export default function ProductDetails() {
-      const {productDetail,loading,addToCart,addToWishList} = useContext(GiftCardContext)
+      const {productDetail,loading,addToCart,addToWishList,message} = useContext(GiftCardContext)
 
       function addToCardHandler(card) {
           addToCart(card)
@@ -25,9 +25,13 @@
         return <p>No product selected.</p>
       }
 
+      
+
 
       return (
-          <div className="d-flex justify-content-center align-items-center min-vh-10 p-5">
+        <>
+        {message && <p className="text-success">{message}</p>}
+        <div className="d-flex justify-content-center align-items-center min-vh-10 p-5">
   <div className="card" style={{ width: "45rem" }}>
     <div className="row g-0">
       <div className="col-md-4">
@@ -68,6 +72,8 @@
     </div>
   </div>
 </div>
+        </>
+          
           
       )
   }
