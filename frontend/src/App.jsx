@@ -43,9 +43,9 @@ import ViewOrders from './Components/ViewOrders.jsx'
           const fetchGiftCards = async () => {
               try {
                 setLoading(true)
-                  let url = "https://viii-major-project-backend.vercel.app/allgiftCards"
+                  let url = "https://viii-major-project-backend.vercel.app/card/allgiftCards"
               if (selectedCategory) {
-                  url = `https://viii-major-project-backend.vercel.app/category/${selectedCategory}`
+                  url = `https://viii-major-project-backend.vercel.app/card/category/${selectedCategory}`
               }
               const response = await fetch(url)
               const data = await response.json()
@@ -88,7 +88,7 @@ import ViewOrders from './Components/ViewOrders.jsx'
         setLoading(true)
         try {
           setSearchError("")
-          const result = await fetch(`https://viii-major-project-backend.vercel.app/title/${title}`)
+          const result = await fetch(`https://viii-major-project-backend.vercel.app/card/title/${title}`)
           const data = await result.json()
 
           if (result.ok && data.foundGiftCard.length > 0 ) {
