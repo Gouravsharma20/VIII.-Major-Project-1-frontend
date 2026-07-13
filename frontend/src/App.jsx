@@ -1,6 +1,10 @@
   import { useCallback, useEffect, useState } from 'react'
   import './App.css'
 
+  import { ToastContainer } from 'react-toastify';
+
+  
+
   import BookContext from './Context/GiftCardContext.jsx'
 
   import { BrowserRouter,Route,Routes } from 'react-router-dom'
@@ -21,6 +25,8 @@
   import SuccessPage from './Pages/SuccessPage.jsx'
 import ViewOrders from './Components/ViewOrders.jsx'
 
+import { toast } from 'react-toastify';
+
 
   function App() {
     const [loading,setLoading] = useState(true)
@@ -28,14 +34,15 @@ import ViewOrders from './Components/ViewOrders.jsx'
     const [selectedCategory, setSelectedCategory] = useState("")
     const [cart,setCart] = useState([])
     const [wishList,setWishList] = useState([])
-    const [message,setMessage] = useState("")
+    
 
 
     const [homeSearchResult, setHomeSearchResult] = useState(null)
     const [homeSearchNotFound,setHomeSearchNotFound] = useState(false)
     const [searchedCard,setSearchedCard] = useState(null)
     const [searchError,setSearchError] = useState("")
-    // const [clearSearch,setClearSearch] = useState("")
+    
+    
 
     const [productDetail,setProductDetail] = useState([])
 
@@ -120,27 +127,24 @@ import ViewOrders from './Components/ViewOrders.jsx'
         const productAlreadyExist = cart.some((item)=>item._id === product._id)
         if (productAlreadyExist) {
             setCart((prev)=>prev.map((item)=>
-              item._id === product._id ? {...item,quantity:item.quantity + 1}:item)) 
-          setMessage(`${product.giftCardTitle} quantity updated successfully`)
+              item._id === product._id ? {...item,quantity:item.quantity + 1}:item))
+            toast.success(`${product.giftCardTitle} quantity updated successfully`)
         } else {
           setCart((prev)=>[...prev,{...product,quantity:1}])
-          setMessage(`${product.giftCardTitle} added successfully to cart`)
+
+          toast.success(`${product.giftCardTitle} added successfully to cart`)
         }
-        setTimeout(()=>setMessage(""), 2000)
       }
 
       function addToWishList(card) {
-      setWishList((prev)=>{
-        const alreadyExist = prev.some((item)=>item._id === card._id)
+        const alreadyExist = wishList.some((item)=>item._id === card._id)
         if(alreadyExist){
-          setMessage(`${card.giftCardTitle} already exists in the wishlist`)
-          return prev
-          
+          toast.error(`${card.giftCardTitle} already exists in the wishlist`)
+          return
         }
-        setMessage(`${card.giftCardTitle} added to the wishlist successfuly!`)
-        return [...prev,card]
-        
-      })
+        setWishList((prev) => [...prev, card])
+
+        toast.success(`${card.giftCardTitle} added to the wishlist successfuly!`)
     }
 
     return (
@@ -167,12 +171,13 @@ import ViewOrders from './Components/ViewOrders.jsx'
         removeFromCart,
         addToCart,
         addToWishList,
-        message,
         clearSearch
         }}>
       <BrowserRouter>
       <Nav/>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
+        
         <Route path = "/" element={<Home/>}/>
         <Route path='/product/:category' element={<Products/>}/>
         <Route path="/wishlist" element={<Wishlist/>}/>

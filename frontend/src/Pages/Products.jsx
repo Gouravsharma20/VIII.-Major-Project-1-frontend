@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom"
 
 import wishlistIcon from "../Assets/wishlist.svg"
 
+
+
 export default function Products() {
-    const {giftcards,setSelectedCategory,searchedCard,searchError,loading,setProductDetail,addToCart,addToWishList,message,clearSearch} = useContext(GiftCardContext)
+    const {giftcards,setSelectedCategory,searchedCard,searchError,loading,setProductDetail,addToCart,addToWishList,clearSearch} = useContext(GiftCardContext)
     const [sortBy,setSortBy] = useState(null)
      const {category} = useParams()
 
@@ -54,7 +56,6 @@ export default function Products() {
 
     return (
         <>
-        {message && <p className="text-success">{message}</p>}
         <div className="d-flex justify-content-end pe-4 pt-2">
   <div className="dropdown">
     <button

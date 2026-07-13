@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 
 
 export default function Wishlist(){
-    const {productDetail, wishList,removeFromWishList,setProductDetail,addToCart,message,cart } = useContext(GiftCardContext)
+    const {productDetail, wishList,removeFromWishList,setProductDetail,addToCart } = useContext(GiftCardContext)
 
     function addToCardHandler(card) {
           addToCart(card)
@@ -31,7 +31,6 @@ export default function Wishlist(){
 
     return (
         <>
-        {message && <p className="text-success">{message}</p>}
         {wishList.length === 0 ? (
             <p>No items in wishlist</p>
         ) : (

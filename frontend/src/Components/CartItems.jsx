@@ -2,11 +2,13 @@ import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
 import deleteIcon from "../Assets/delete.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+  
 
 import wishlistIcon from "../Assets/wishlist.svg"
 
 export default function CartItems() {
-    const { cart, removeFromCart, setProductDetail,message,addToWishList,setCart,setMessage } = useContext(GiftCardContext);
+    const { cart, removeFromCart, setProductDetail,addToWishList,setCart } = useContext(GiftCardContext);
     const navigate = useNavigate();
 
     function handleDelete(itemId) {
@@ -65,6 +67,7 @@ export default function CartItems() {
         : item
     )
   )
+  toast.success("Quantity increased successfully");
     }
 
 
@@ -76,13 +79,13 @@ export default function CartItems() {
         : item
     )
   )
+  toast.success("Quantity decreased successfully");
   }
 
     
 
     return (
         <>
-        {message && <p className="text-success">{message}</p>}
             <ul className="list-unstyled">
                 {cart.map((item, index) => (
                     <li key={item._id ?? index}>
@@ -90,10 +93,12 @@ export default function CartItems() {
                             <div className="row g-0">
                                 <div className="col-md-4">
                                     <img
-                                        src={item.giftCardImage}
-                                        className="img-fluid rounded-start"
-                                        alt="..."
-                                    />
+    src={item.giftCardImage}
+    alt={item.giftCardTitle}
+    className="rounded-start mx-auto d-block mt-4"
+    style={{ height: "150px", width: "150px", objectFit: "cover" }}
+  />
+                                    
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body">
@@ -139,7 +144,7 @@ export default function CartItems() {
                                             </small>
                                         </p>
                                         
-                                        <button onClick={() => showProductDetailsHandler(item)}>
+                                        <button className="btn btn-info" onClick={() => showProductDetailsHandler(item)}>
                                             Show Product Details
                                         </button>
                                         <Link className="btn btn-primary" to={"/adress"}>
