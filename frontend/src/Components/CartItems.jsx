@@ -18,8 +18,30 @@ export default function CartItems() {
         navigate("/productDetails");
     }
 
-    function handleProceedToPayment() {
-        navigate("/payment"); // or "/checkout" — whatever route you use
+    async function handleProceedToPayment(event) {
+        event.preventDefault()
+        try {
+            const response = await fetch("https://viii-major-project-backend.vercel.app/order/UserOrder",{
+                method:"POST",
+                headers:{ "Content-Type": "application/json" },
+                body:JSON.stringify({cart,totalAmount})
+            })
+
+            const data = await response.json()
+
+            
+
+            if (!response.ok) {
+                console.log("Order failed:", data.error || data.err);
+            return;
+            }
+
+            navigate("/success");
+
+        } catch(err) {
+            console.log(err)
+        }
+        
     }
 
     function addToWishListHandler(card) {
@@ -135,9 +157,9 @@ export default function CartItems() {
 
             <div className="cart-summary d-flex justify-content-between align-items-center p-3">
                 <h5>Total: {totalAmount}</h5>
-                <Link to={"/success"} className="btn btn-success" onClick={handleProceedToPayment}>
-                    Proceed to Payment
-                </Link>
+                <button className="btn btn-success" onClick={handleProceedToPayment}>
+    Proceed to Payment
+</button>
             </div>
         </>
     );
