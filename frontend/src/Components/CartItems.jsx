@@ -144,10 +144,10 @@ export default function CartItems() {
                                             </small>
                                         </p>
                                         
-                                        <button className="btn btn-info" onClick={() => showProductDetailsHandler(item)}>
+                                        <button className="btn btn-info mb-3 pe-2" onClick={() => showProductDetailsHandler(item)}>
                                             Show Product Details
                                         </button>
-                                        <Link className="btn btn-primary" to={"/adress"}>
+                                        <Link className="btn btn-primary pe-2" to={"/adress"}>
                                             Add delivery adress
                                         </Link>
                                     </div>
