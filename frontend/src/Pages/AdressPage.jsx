@@ -2,10 +2,23 @@ import { useContext } from "react";
 
 import GiftCardContext from "../Context/GiftCardContext"
 
+async function SaveAdress(e) {
+  e.preventDefault()
+
+  // try {
+
+
+  // } catch(err) {
+  //   console.log(err)
+  // }
+
+  
+}
+
 export default function AdressPage() {
     const {loading} = useContext(GiftCardContext)
   return (
-    <form>
+    <form onSubmit={SaveAdress}>
       {/* Full Name */}
       <div className="mb-3">
         <label htmlFor="fullName" className="form-label">

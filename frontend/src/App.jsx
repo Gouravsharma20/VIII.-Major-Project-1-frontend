@@ -1,6 +1,8 @@
   import { useCallback, useEffect, useState } from 'react'
   import './App.css'
 
+  import UserProfile from "./Pages/UserProfile.jsx"
+
   import { ToastContainer } from 'react-toastify';
 
   
@@ -13,6 +15,8 @@
 
   import Wishlist from './Components/Wishlist.jsx'
 
+
+
   import Nav from "./Components/Nav.jsx"
   import Login from './Pages/Login.jsx'
   import Products from './Pages/Products.jsx'
@@ -23,6 +27,7 @@
   import CartItems from './Components/CartItems.jsx'
 
   import SuccessPage from './Pages/SuccessPage.jsx'
+
 import ViewOrders from './Components/ViewOrders.jsx'
 
 import { toast } from 'react-toastify';
@@ -188,7 +193,7 @@ import { toast } from 'react-toastify';
         <Route path='/adress' element={<AdressPage/>}/>
         <Route path="/success" element={<SuccessPage />} />
         <Route path='/viewOrders' element={<ViewOrders/>}/>
-        
+        <Route path='/profile' element={<UserProfile/>}/>
       </Routes>
       </BrowserRouter>
       </BookContext.Provider>

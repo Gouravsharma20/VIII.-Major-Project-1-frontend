@@ -93,7 +93,7 @@ export default function Products() {
       <div className="col-md-8">
         <div className="card-body">
           
-          <img  className="float-end" src={wishlistIcon} length="30" width="30" pl-6 style={{cursor:"pointer"}} onClick={()=>addToWishListHandler(card)}/>
+          <img  className="float-end img-fluid" src={wishlistIcon} length="30" width="30" pl-6 style={{cursor:"pointer"}} onClick={()=>addToWishListHandler(card)}/>
           <h5 className="card-title">{card.giftCardTitle}</h5>
           
           
@@ -108,8 +108,8 @@ export default function Products() {
             </small>
           </p>
           
-          <button onClick={()=>addToCardHandler(card)}>Add to Cart</button>
-          <button onClick={()=>showProductDetailsHandler(card)}>Show Product details</button>
+          <button className="btn btn-success me-1" onClick={()=>addToCardHandler(card)}>Add to Cart</button>
+          <button className="btn btn-info" onClick={()=>showProductDetailsHandler(card)}>Show Product details</button>
 
           
           

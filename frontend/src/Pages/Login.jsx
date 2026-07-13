@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import { useNavigate } from "react-router-dom";
 
+import { toast } from 'react-toastify';
+
 
  
 
@@ -32,6 +34,7 @@ export default function Login() {
   const loginData = await response.json()
   setLogin(loginData)
   if (response.ok) {
+    toast.message("user logged in successfully!")
   navigate("/");
 }
   console.log(loginData);

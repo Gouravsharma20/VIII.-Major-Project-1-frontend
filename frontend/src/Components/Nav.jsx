@@ -8,8 +8,19 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import GiftCardContext from "../Context/GiftCardContext";
 
+import profile from '../Assets/profile.svg'
+
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 export default function Navigation(){
+
+const navigate = useNavigate()
+
+  
 
   const {cart,wishList, searchGiftCardByTitle,searchCategory} = useContext(GiftCardContext)
   const [searchTerm, setSearchTerm] = useState("")
@@ -25,6 +36,8 @@ export default function Navigation(){
   }
 
   const totalCartQuantity = cart.reduce((total,item)=>total+item.quantity,0)
+
+  
 
   
 
@@ -55,6 +68,12 @@ export default function Navigation(){
 
 
     <Link to = "/login" className="nav-link ms-1 btn-btn-primary">login</Link>
+
+    <img src={profile} alt="profile" onClick={()=>navigate("/profile")} style={{
+    width: "35px",
+    height: "35px",
+    cursor: "pointer"
+  }}/>
     
 
         <Link className="btn btn-primary" to={"/cart"}> Cart ({totalCartQuantity})</Link>

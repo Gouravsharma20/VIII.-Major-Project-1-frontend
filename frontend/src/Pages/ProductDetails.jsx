@@ -64,7 +64,7 @@
             style={{ cursor: "pointer" }}
             onClick={() => addToWishListHandler(productDetail)}
           />
-          <button onClick={() => addToCardHandler(productDetail)} className="card-link">
+          <button className="btn btn-success" onClick={() => addToCardHandler(productDetail)} className="card-link">
             Add to Cart
           </button>
         </div>
