@@ -27,6 +27,32 @@ export default function Home() {
 
   return (
     <div className="gc-home">
+
+
+
+      <div className="giftmart-banner mb-4">
+      <div className="giftmart-banner-text">
+        <h2>Gift Cards for Every Occasion</h2>
+        <p>Instant delivery. Zero hassle. Pick a card, make someone's day.</p>
+      </div>
+    </div>
+
+
+
+    {giftcards.length > 0 && (
+      <div className="featured-section mb-4">
+        <h5 className="featured-title">Featured Gift Cards</h5>
+        <div className="featured-scroll">
+          {giftcards.map((card) => (
+            <div className="featured-card" key={card._id}>
+              <img src={card.giftCardImage} alt={card.giftCardTitle} />
+              <p className="text-truncate">{card.giftCardTitle}</p>
+              <p className="featured-price">₹{card.giftCardBalance}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
       <header className="gc-hero">
         <h1 className="gc-title">All Categories</h1>
         <p className="gc-subtitle">
@@ -42,16 +68,26 @@ export default function Home() {
       )}
 
       <ul className="gc-grid">
-        {listToShow.map((cat, i) => (
-          <li key={cat} className="gc-card" style={{ "--tint": `var(--gc-accent-${(i % 4) + 1})` }}>
-            <Link to={`/product/${cat}`} className="gc-card-link">
-              <span className="gc-card-fold" />
-              <span className="gc-card-label">{cat}</span>
-              <span className="gc-card-cta">Shop now →</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+  {listToShow.map((cat, i) => (
+    <li
+      key={cat}
+      className="gc-card h-100"
+      style={{ "--tint": `var(--gc-accent-${(i % 4) + 1})` }}
+    >
+      <Link
+        to={`/product/${cat}`}
+        className="gc-card-link h-100 d-flex justify-content-center align-items-center"
+      >
+        <span className="gc-card-fold" />
+
+        <span>
+          <span className="gc-card-label">{cat}</span>
+          <span className="gc-card-cta"> Shop now →</span>
+        </span>
+      </Link>
+    </li>
+  ))}
+</ul>
     </div>
   )
 }
