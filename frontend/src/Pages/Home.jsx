@@ -3,7 +3,18 @@ import BookContext from "../Context/GiftCardContext"
 import { Link } from "react-router-dom"
 import "./Home.css"
 
+import GiftCardContext from "../Context/GiftCardContext"
+
+import { useNavigate } from "react-router-dom";
+
+
+
 export default function Home() {
+  const { setProductDetail } = useContext(GiftCardContext);
+
+  const navigate = useNavigate()
+
+  
   const {
     giftcards, setSelectedCategory, categories,
     homeSearchResult, homeSearchNotFound, loading, clearSearch
@@ -24,6 +35,11 @@ export default function Home() {
       </div>
     )
   }
+
+  function showProductDetailsHandler(card) {
+      setProductDetail(card)
+      navigate("/productDetails")
+      }
 
   return (
     <div className="gc-home">
@@ -88,12 +104,14 @@ export default function Home() {
         })}
       </ul>
 
+      
+
       {giftcards.length > 0 && (
         <div className="featured-section mb-4">
           <h5 className="featured-title">Featured Gift Cards</h5>
           <div className="featured-scroll">
             {giftcards.map((card) => (
-              <div className="featured-card" key={card._id}>
+              <div className="featured-card" key={card._id}  onClick={() => showProductDetailsHandler(card)} style={{ cursor: "pointer" }}>
                 <img src={card.giftCardImage} alt={card.giftCardTitle} />
                 <p className="text-truncate">{card.giftCardTitle}</p>
                 <p className="featured-price">₹{card.giftCardBalance}</p>

@@ -6,7 +6,7 @@ import deleteIcon from "../Assets/delete.svg"
 import { useNavigate } from "react-router-dom"
 
 export default function Wishlist(){
-    const {productDetail, wishList, removeFromWishList, setProductDetail, addToCart } = useContext(GiftCardContext)
+    const {wishList, removeFromWishList, setProductDetail, addToCart } = useContext(GiftCardContext)
 
     function addToCardHandler(card) {
         addToCart(card)

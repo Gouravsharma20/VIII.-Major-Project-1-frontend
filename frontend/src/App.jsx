@@ -28,6 +28,8 @@
 
   import SuccessPage from './Pages/SuccessPage.jsx'
 
+  import SignUp from './Pages/SignUp.jsx';
+
 import ViewOrders from './Components/ViewOrders.jsx'
 
 import { toast } from 'react-toastify';
@@ -194,6 +196,7 @@ import { toast } from 'react-toastify';
         <Route path="/success" element={<SuccessPage />} />
         <Route path='/viewOrders' element={<ViewOrders/>}/>
         <Route path='/profile' element={<UserProfile/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
       </Routes>
       </BrowserRouter>
       </BookContext.Provider>

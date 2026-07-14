@@ -1,23 +1,33 @@
-
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-export default function Login() {
-  const [login, setLogin] = useState("");
+export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  async function loginhandler(e) {
+  async function signupHandler(e) {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(
-        "https://viii-major-project-backend.vercel.app/user/login",
+        "https://viii-major-project-backend.vercel.app/user/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -28,21 +38,18 @@ export default function Login() {
           }),
         }
       );
-      const loginData = await response.json();
-      setLogin(loginData);
+      const signupData = await response.json();
 
       if (response.ok) {
-        toast.success("Logged in successfully!");
-        navigate("/");
+        toast.success("Account created successfully!");
+        navigate("/login");
       } else {
-        toast.error(loginData.message || "Login failed. Please try again.");
+        toast.error(signupData.message || "Signup failed. Please try again.");
       }
-      console.log(loginData);
+      console.log(signupData);
     } catch (err) {
       console.log(err);
-      toast.success("Logged in successfully!");
-      navigate("/");
-      // toast.error("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -54,34 +61,34 @@ export default function Login() {
         className="card shadow-sm border-0 p-4"
         style={{ borderRadius: "12px", width: "100%", maxWidth: "420px" }}
       >
-        <h3 className="fw-semibold mb-1 text-center">Welcome back</h3>
+        <h3 className="fw-semibold mb-1 text-center">Create an account</h3>
         <p className="text-muted text-center small mb-4">
-          Log in to continue to GiftMart
+          Sign up to start shopping on GiftMart
         </p>
 
-        <form onSubmit={loginhandler}>
+        <form onSubmit={signupHandler}>
           <div className="mb-3">
-            <label htmlFor="loginName" className="form-label">
+            <label htmlFor="signupName" className="form-label">
               Name
             </label>
             <input
               type="text"
               className="form-control"
-              id="loginName"
-              placeholder="Your name"
+              id="signupName"
+              placeholder="Your full name"
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
 
           <div className="mb-3">
-            <label htmlFor="loginEmail" className="form-label">
+            <label htmlFor="signupEmail" className="form-label">
               Email address
             </label>
             <input
               type="email"
               className="form-control"
-              id="loginEmail"
+              id="signupEmail"
               placeholder="you@example.com"
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -89,15 +96,15 @@ export default function Login() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="loginPassword" className="form-label">
+            <label htmlFor="signupPassword" className="form-label">
               Password
             </label>
             <div className="input-group">
               <input
                 type={showPassword ? "text" : "password"}
                 className="form-control"
-                id="loginPassword"
-                placeholder="Enter your password"
+                id="signupPassword"
+                placeholder="At least 6 characters"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
@@ -112,15 +119,18 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="mb-4 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="rememberMe"
-            />
-            <label className="form-check-label small" htmlFor="rememberMe">
-              Remember me
+          <div className="mb-4">
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirm Password
             </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-control"
+              id="confirmPassword"
+              placeholder="Re-enter your password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
           </div>
 
           <button
@@ -128,12 +138,12 @@ export default function Login() {
             className="btn btn-dark w-100 py-2"
             disabled={loading}
           >
-            {loading ? "Logging in..." : "Log In"}
+            {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
 
         <p className="text-center small text-muted mt-4 mb-0">
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
       </div>
     </div>
