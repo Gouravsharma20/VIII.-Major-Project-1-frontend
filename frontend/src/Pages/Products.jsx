@@ -76,43 +76,43 @@ export default function Products() {
 
                 <p className="fw-bold mb-2">Sort By Name</p>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="alphabeticalSort" id="atoz" onClick={()=>setSortBy("az")} />
+                <input className="form-check-input" type="radio" name="alphabeticalSort" id="atoz"  checked={sortBy === "az"} onClick={()=>setSortBy("az")} />
                 <label className="form-check-label" htmlFor="atoz">A-Z</label>
               </div>
               <div className="form-check mb-3">
-                <input className="form-check-input" type="radio" name="alphabeticalSort" id="ztoa" onChange={()=>setSortBy("za")} />
+                <input className="form-check-input" type="radio" name="alphabeticalSort" id="ztoa" checked={sortBy === "za"} onChange={()=>setSortBy("za")} />
                 <label className="form-check-label" htmlFor="ztoa">Z-A</label>
               </div>
 
               <p className="fw-bold mb-2">Rating (Sort By)</p>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="ratingSort" id="fourAndAbove" onClick={()=>setRatingFilter("fourAndAbove")} />
+                <input className="form-check-input" type="radio" name="ratingSort" id="fourAndAbove" checked={ratingFilter === "fourAndAbove"} onClick={()=>setRatingFilter("fourAndAbove")} />
                 <label className="form-check-label" htmlFor="fourAndAbove">4 Stars & Above</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="ratingSort" id="threeAndAbove" onClick={()=>setRatingFilter("threeAndAbove")} />
+                <input className="form-check-input" type="radio" name="ratingSort" id="threeAndAbove" checked={ratingFilter === "threeAndAbove"} onClick={()=>setRatingFilter("threeAndAbove")} />
                 <label className="form-check-label" htmlFor="threeAndAbove">3 Stars & Above</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="ratingSort" id="twoAndAbove" onClick={()=>setRatingFilter("twoAndAbove")} />
+                <input className="form-check-input" type="radio" name="ratingSort" id="twoAndAbove" checked={ratingFilter === "twoAndAbove"} onClick={()=>setRatingFilter("twoAndAbove")} />
                 <label className="form-check-label" htmlFor="twoAndAbove">2 Stars & Above</label>
               </div>
               <div className="form-check mb-3">
-                <input className="form-check-input" type="radio" name="ratingSort" id="oneAndAbove" onClick={()=>setRatingFilter("oneAndAbove")} />
+                <input className="form-check-input" type="radio" name="ratingSort" id="oneAndAbove" checked={ratingFilter === "oneAndAbove"} onClick={()=>setRatingFilter("oneAndAbove")} />
                 <label className="form-check-label" htmlFor="oneAndAbove">1 Stars & Above</label>
               </div>
 
               <p className="fw-bold mb-2">Price (Sort By)</p>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="priceSort" id="defaultSort" onClick={()=>setSortBy(null)} />
+                <input className="form-check-input" type="radio" name="priceSort" id="defaultSort" checked={sortBy === "defaultSort"} onClick={()=>setSortBy(null)} />
                 <label className="form-check-label" htmlFor="defaultSort">Default</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="priceSort" id="lowToHigh" onClick={()=>setSortBy("lowToHigh")} />
+                <input className="form-check-input" type="radio" name="priceSort" id="lowToHigh" checked={sortBy === "lowToHigh"} onClick={()=>setSortBy("lowToHigh")} />
                 <label className="form-check-label" htmlFor="lowToHigh">Price: Low to High</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="priceSort" id="highToLow" onClick={()=>setSortBy("highToLow")} />
+                <input className="form-check-input" type="radio" name="priceSort" id="highToLow" checked={sortBy === "highToLow"} onClick={()=>setSortBy("highToLow")} />
                 <label className="form-check-label" htmlFor="highToLow">Price: High to Low</label>
               </div>
 
