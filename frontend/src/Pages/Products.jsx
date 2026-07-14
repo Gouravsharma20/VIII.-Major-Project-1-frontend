@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import GiftCardContext from "../Context/GiftCardContext"
 import wishlistIcon from "../Assets/wishlist.svg"
 
+import "./Product.css"
+
 export default function Products() {
     const {giftcards,setSelectedCategory,searchedCard,searchError,loading,setProductDetail,addToCart,addToWishList,clearSearch} = useContext(GiftCardContext)
     const [sortBy,setSortBy] = useState(null)
@@ -44,6 +46,8 @@ export default function Products() {
       cardsToShow = cardsToShow.filter(card=>card.giftCardRating >=1)
     }
 
+
+
     cardsToShow.sort((a,b)=>{
       if (sortBy ==="az") return a.giftCardTitle.localeCompare(b.giftCardTitle)
       if (sortBy ==="za") return b.giftCardTitle.localeCompare(a.giftCardTitle)
@@ -63,8 +67,14 @@ export default function Products() {
             {/* LEFT SIDEBAR - FILTERS */}
             <div className="col-md-3 border-end">
               <h5 className="mb-3">Filters</h5>
+              <div className="filter-options">
+                <p className="fw-bold mb-2">Reset</p>
+                <div className="form-check">
+                <input className="form-check-input" type="radio" name="defaultreset" id="defaultreset" checked={sortBy === null && ratingFilter === null} onChange={()=>{ setSortBy(null); setRatingFilter(null) }} />
+                <label className="form-check-label" htmlFor="defaultreset">Reset to Default</label>
+              </div>
 
-              <p className="fw-bold mb-2">Sort By Name</p>
+                <p className="fw-bold mb-2">Sort By Name</p>
               <div className="form-check">
                 <input className="form-check-input" type="radio" name="alphabeticalSort" id="atoz" onClick={()=>setSortBy("az")} />
                 <label className="form-check-label" htmlFor="atoz">A-Z</label>
@@ -105,6 +115,10 @@ export default function Products() {
                 <input className="form-check-input" type="radio" name="priceSort" id="highToLow" onClick={()=>setSortBy("highToLow")} />
                 <label className="form-check-label" htmlFor="highToLow">Price: High to Low</label>
               </div>
+
+              </div>
+
+              
             </div>
 
             {/* RIGHT SIDE - GIFT CARDS GRID */}
@@ -133,12 +147,6 @@ export default function Products() {
                         <h5 className="card-title">{card.giftCardTitle}</h5>
                         <p className="card-text">Price : {card.giftCardBalance}</p>
                         <p className="card-text">Rating : {card.giftCardRating}</p>
-                        <p className="card-text">Term and conditions : {card.redemptionTerms}</p>
-                        <p className="card-text">
-                          <small className="text-body-secondary">
-                            Expiry Date : {card.giftCardexpiryDate}
-                          </small>
-                        </p>
                         <button className="btn btn-success mb-2" onClick={()=>addToCardHandler(card)}>Add to Cart</button>
                         <button className="btn btn-info" onClick={()=>showProductDetailsHandler(card)}>Show Product details</button>
                       </div>

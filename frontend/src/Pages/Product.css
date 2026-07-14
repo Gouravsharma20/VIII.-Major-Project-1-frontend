@@ -1,0 +1,9 @@
+.filter-options .form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-options .form-check-input {
+  margin: 0;
+}
