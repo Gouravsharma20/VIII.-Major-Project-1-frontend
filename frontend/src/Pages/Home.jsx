@@ -27,32 +27,13 @@ export default function Home() {
 
   return (
     <div className="gc-home">
-
-
-
       <div className="giftmart-banner mb-4">
-      <div className="giftmart-banner-text">
-        <h2>Gift Cards for Every Occasion</h2>
-        <p>Instant delivery. Zero hassle. Pick a card, make someone's day.</p>
-      </div>
-    </div>
-
-
-
-    {giftcards.length > 0 && (
-      <div className="featured-section mb-4">
-        <h5 className="featured-title">Featured Gift Cards</h5>
-        <div className="featured-scroll">
-          {giftcards.map((card) => (
-            <div className="featured-card" key={card._id}>
-              <img src={card.giftCardImage} alt={card.giftCardTitle} />
-              <p className="text-truncate">{card.giftCardTitle}</p>
-              <p className="featured-price">₹{card.giftCardBalance}</p>
-            </div>
-          ))}
+        <div className="giftmart-banner-text">
+          <h2>Gift Cards for Every Occasion</h2>
+          <p>Instant delivery. Zero hassle. Pick a card, make someone's day.</p>
         </div>
       </div>
-    )}
+
       <header className="gc-hero">
         <h1 className="gc-title">All Categories</h1>
         <p className="gc-subtitle">
@@ -68,26 +49,59 @@ export default function Home() {
       )}
 
       <ul className="gc-grid">
-  {listToShow.map((cat, i) => (
-    <li
-      key={cat}
-      className="gc-card h-100"
-      style={{ "--tint": `var(--gc-accent-${(i % 4) + 1})` }}
-    >
-      <Link
-        to={`/product/${cat}`}
-        className="gc-card-link h-100 d-flex justify-content-center align-items-center"
-      >
-        <span className="gc-card-fold" />
+        {listToShow.map((cat, i) => {
+          const catCards = giftcards.filter(card => card.giftCardCategory === cat)
+          const previewImg = catCards[0]?.giftCardImage
+          const cardCount = catCards.length
 
-        <span>
-          <span className="gc-card-label">{cat}</span>
-          <span className="gc-card-cta"> Shop now →</span>
-        </span>
-      </Link>
-    </li>
-  ))}
-</ul>
+          return (
+            <li
+              key={cat}
+              className="gc-card"
+              style={{ "--tint": `var(--gc-accent-${(i % 4) + 1})` }}
+            >
+              <Link to={`/product/${cat}`} className="gc-card-link">
+                <div className="gc-card-img-wrap">
+                  {previewImg && (
+                    <img
+                      src={previewImg}
+                      className="gc-card-img"
+                      alt={cat}
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="gc-card-overlay" />
+                  {cardCount > 0 && (
+                    <span className="gc-card-count">{cardCount} cards</span>
+                  )}
+                </div>
+
+                <div className="gc-card-body">
+                  <h5 className="gc-card-title" title={cat}>{cat}</h5>
+                  <span className="gc-card-cta">
+                    Shop Now <span className="gc-arrow">→</span>
+                  </span>
+                </div>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+
+      {giftcards.length > 0 && (
+        <div className="featured-section mb-4">
+          <h5 className="featured-title">Featured Gift Cards</h5>
+          <div className="featured-scroll">
+            {giftcards.map((card) => (
+              <div className="featured-card" key={card._id}>
+                <img src={card.giftCardImage} alt={card.giftCardTitle} />
+                <p className="text-truncate">{card.giftCardTitle}</p>
+                <p className="featured-price">₹{card.giftCardBalance}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

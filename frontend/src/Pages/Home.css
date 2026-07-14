@@ -1,18 +1,47 @@
+
+:root {
+  --gc-accent-1: #ff7a59;
+  --gc-accent-2: #6c63ff;
+  --gc-accent-3: #16a085;
+  --gc-accent-4: #e91e63;
+}
+
 .gc-home {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
   font-family: system-ui, sans-serif;
   color: #1a1a1a;
 }
 
+/* Banner */
+.giftmart-banner {
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.giftmart-banner-text h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.giftmart-banner-text p {
+  color: #ccc;
+  margin: 0;
+}
+
+/* Header */
 .gc-title {
   font-size: 2rem;
   font-weight: 600;
   margin: 0 0 0.25rem;
 }
 
-.gc-count {
+.gc-subtitle {
   color: #666;
   font-size: 0.9rem;
   margin: 0 0 1.5rem;
@@ -30,33 +59,153 @@
   color: #666;
 }
 
+/* Category grid */
 .gc-grid {
   list-style: none;
-  margin: 0;
+  margin: 0 0 3rem;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.gc-card {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-top: 3px solid var(--tint);
+}
+
+.gc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
 .gc-card-link {
   display: block;
-  padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
   text-decoration: none;
-  color: #1a1a1a;
-  font-weight: 500;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  color: inherit;
 }
 
-.gc-card-link:hover,
-.gc-card-link:focus-visible {
-  border-color: #1a1a1a;
-  background: #f7f7f7;
+.gc-card-img-wrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  background: #f0f0f0;
 }
 
+.gc-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gc-card:hover .gc-card-img {
+  transform: scale(1.08);
+}
+
+.gc-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 60%);
+}
+
+.gc-card-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.gc-card-body {
+  padding: 1rem 1.1rem 1.2rem;
+  text-align: center;
+}
+
+.gc-card-title {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gc-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tint);
+  border: 1.5px solid var(--tint);
+  padding: 5px 14px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.gc-card:hover .gc-card-cta {
+  background: var(--tint);
+  color: #fff;
+}
+
+.gc-arrow {
+  transition: transform 0.2s ease;
+}
+
+.gc-card:hover .gc-arrow {
+  transform: translateX(3px);
+}
+
+/* Focus accessibility */
 .gc-card-link:focus-visible {
   outline: 2px solid #1a1a1a;
   outline-offset: 2px;
+  border-radius: 1rem;
+}
+
+/* Featured scroll section */
+.featured-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.featured-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.featured-card {
+  flex: 0 0 140px;
+  background: #fff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+.featured-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.featured-card p {
+  margin: 0.4rem 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.featured-price {
+  font-weight: 600;
+  color: #16a085;
 }
