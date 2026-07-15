@@ -33,6 +33,7 @@
 import ViewOrders from './Components/ViewOrders.jsx'
 
 import { toast } from 'react-toastify';
+import Footer from './Components/Footer.jsx';
 
 
   function App() {
@@ -48,6 +49,8 @@ import { toast } from 'react-toastify';
     const [homeSearchNotFound,setHomeSearchNotFound] = useState(false)
     const [searchedCard,setSearchedCard] = useState(null)
     const [searchError,setSearchError] = useState("")
+
+    const [placedOrders, setPlacedOrders] = useState([]);
     
     
 
@@ -178,7 +181,7 @@ import { toast } from 'react-toastify';
         removeFromCart,
         addToCart,
         addToWishList,
-        clearSearch
+        clearSearch, placedOrders, setPlacedOrders
         }}>
       <BrowserRouter>
       <Nav/>
@@ -198,6 +201,7 @@ import { toast } from 'react-toastify';
         <Route path='/profile' element={<UserProfile/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Routes>
+      <Footer/>
       </BrowserRouter>
       </BookContext.Provider>
     )

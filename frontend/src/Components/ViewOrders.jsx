@@ -2,20 +2,20 @@ import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
 
 export default function ViewOrders() {
-    const { cart } = useContext(GiftCardContext);
+    const { placedOrders } = useContext(GiftCardContext);
 
     return (
         <div className="container py-4" style={{ maxWidth: "700px" }}>
             <h3 className="mb-4 fw-semibold">My Orders</h3>
 
-            {cart.length === 0 ? (
+            {placedOrders.length === 0 ? (
                 <div className="text-center text-muted py-5">
                     <p className="fs-5 mb-0">No orders placed yet</p>
                     <p className="small">Your placed orders will show up here</p>
                 </div>
             ) : (
                 <div className="d-flex flex-column gap-3">
-                    {cart.map((item, index) => (
+                    {placedOrders.map((item, index) => (
                         <div
                             className="card shadow-sm border-0"
                             style={{ borderRadius: "12px", overflow: "hidden" }}

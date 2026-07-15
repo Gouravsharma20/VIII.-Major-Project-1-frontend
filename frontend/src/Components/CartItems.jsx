@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import wishlistIcon from "../Assets/wishlist.svg"
 
 export default function CartItems() {
-    const { cart, removeFromCart, setProductDetail, addToWishList, setCart } = useContext(GiftCardContext);
+    const { cart, removeFromCart, setProductDetail, addToWishList, setCart, setPlacedOrders} = useContext(GiftCardContext);
     const navigate = useNavigate();
 
     function handleDelete(itemId) {
@@ -38,6 +38,10 @@ export default function CartItems() {
                 console.log("Order failed:", data.error || data.err);
                 return;
             }
+
+            setPlacedOrders((prev) => [...prev, ...cart]);
+
+            setCart([]);
 
             navigate("/success");
 

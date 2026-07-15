@@ -1,3 +1,4 @@
+import Footer from "../Components/Footer";
 export default function UserProfile() {
     const user = {
         name: "Gourav Sharma",
@@ -66,6 +67,7 @@ export default function UserProfile() {
                     )}
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }
