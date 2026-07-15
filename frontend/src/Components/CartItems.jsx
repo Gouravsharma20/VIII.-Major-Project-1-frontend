@@ -81,7 +81,7 @@ export default function CartItems() {
     }
 
     function decreaseQuantity(product) {
-        if (product.quantity>0){
+        if (product.quantity<=1){
             toast.error("product cannot be negative")
             return
         }
