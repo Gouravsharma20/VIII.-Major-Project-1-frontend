@@ -51,7 +51,7 @@ export default function Wishlist(){
                                     />
                                 </div>
                                 <div className="col-8 col-md-9">
-                                    <div className="card-body p-3 position-relative">
+                                    <div className="card-body p-3 position-relative d-flex flex-column h-100">
                                         <img
                                             src={deleteIcon}
                                             alt="delete"
@@ -69,7 +69,7 @@ export default function Wishlist(){
                                             Redeemable: {item.redemptionType}
                                         </p>
 
-                                        <div className="d-flex gap-2">
+                                        <div className=" ps-5 d-flex gap-2">
                                             <button
                                                 className="btn btn-outline-secondary btn-sm"
                                                 onClick={() => showProductDetailsHandler(item)}
