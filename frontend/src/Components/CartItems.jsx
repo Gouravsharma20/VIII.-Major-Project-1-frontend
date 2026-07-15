@@ -69,6 +69,7 @@ export default function CartItems() {
     );
 
     function increaseQuantity(product) {
+        
         setCart((prev) =>
             prev.map((item) =>
                 item._id === product._id
@@ -80,6 +81,10 @@ export default function CartItems() {
     }
 
     function decreaseQuantity(product) {
+        if (product.quantity>0){
+            toast.error("product cannot be negative")
+            return
+        }
         setCart((prev) =>
             prev.map((item) =>
                 item._id === product._id
@@ -124,7 +129,7 @@ export default function CartItems() {
                                         onClick={() => handleDelete(item._id)}
                                     />
 
-                                    <div className="d-flex align-items-start gap-2 pe-4">
+                                    <div className="d-flex align-items-center justify-content-center gap-2 pe-4">
                                         <h5 className="card-title mb-1">{item.giftCardTitle}</h5>
                                         <img
                                             src={wishlistIcon}
