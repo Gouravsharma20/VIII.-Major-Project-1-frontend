@@ -34,6 +34,7 @@ import ViewOrders from './Components/ViewOrders.jsx'
 
 import { toast } from 'react-toastify';
 import Footer from './Components/Footer.jsx';
+import AdressList from './Pages/AdressList.jsx';
 
 
   function App() {
@@ -55,6 +56,20 @@ import Footer from './Components/Footer.jsx';
     
 
     const [productDetail,setProductDetail] = useState([])
+
+    const [address, setAddress] = useState({
+    fullName: "",
+    mobileNumber: "",
+    pincode: "",
+    locality: "",
+    houseNo: "",          
+    flatOrBuilding: "", 
+    landmark: "",
+    district: "",
+    state: "",
+    addressType: "Home",
+    isDefault: false,   
+});
 
     useEffect(()=>{
           const fetchGiftCards = async () => {
@@ -181,12 +196,18 @@ import Footer from './Components/Footer.jsx';
         removeFromCart,
         addToCart,
         addToWishList,
-        clearSearch, placedOrders, setPlacedOrders
+        clearSearch,
+        placedOrders,
+        setPlacedOrders,
+        address,
+        setAddress
         }}>
       <BrowserRouter>
-      <Nav/>
+      <div className="d-flex flex-column min-vh-100">
+         <Nav/>
       <ToastContainer position="top-right" autoClose={2000} />
-      <Routes>
+      <main className="flex-grow-1">
+        <Routes>
         
         <Route path = "/" element={<Home/>}/>
         <Route path='/product/:category' element={<Products/>}/>
@@ -200,8 +221,12 @@ import Footer from './Components/Footer.jsx';
         <Route path='/viewOrders' element={<ViewOrders/>}/>
         <Route path='/profile' element={<UserProfile/>}/>
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/adresslist' element={<AdressList/>}/>
       </Routes>
+      </main>
       <Footer/>
+      </div>
+     
       </BrowserRouter>
       </BookContext.Provider>
     )

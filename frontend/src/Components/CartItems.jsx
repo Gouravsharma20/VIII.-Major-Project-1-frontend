@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import wishlistIcon from "../Assets/wishlist.svg"
 
 export default function CartItems() {
-    const { cart, removeFromCart, setProductDetail, addToWishList, setCart, setPlacedOrders} = useContext(GiftCardContext);
+    const { cart, removeFromCart, setProductDetail, addToWishList, setCart, setPlacedOrders,address} = useContext(GiftCardContext);
     const navigate = useNavigate();
 
     function handleDelete(itemId) {
@@ -177,9 +177,7 @@ export default function CartItems() {
                                         >
                                             View Details
                                         </button>
-                                        <Link className="btn btn-outline-dark btn-sm" to={"/adress"}>
-                                            Add Delivery Address
-                                        </Link>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -193,10 +191,38 @@ export default function CartItems() {
                 style={{ borderRadius: "12px", background: "#f8f9fa" }}
             >
                 <h5 className="mb-0">Total: ₹{totalAmount}</h5>
+
+
+                {/* <Link className="btn btn-outline-dark btn" to={"/adress"}>
+                     Add Delivery Address
+                </Link> */}
+
+
+
+                {address?.fullName ? (<Link className="btn btn-outline-dark btn" to={"/adresslist"}>
+                   Select Delivery Address
+                </Link> )  : (<Link className="btn btn-outline-dark btn" to={"/adress"}>
+                     Add Delivery Address
+                </Link>)}
+                
                 <button className="btn btn-success px-4" onClick={handleProceedToPayment}>
                     Proceed to Payment
                 </button>
             </div>
+
+            {address?.fullName && (
+    <div className="p-3 mt-3 shadow-sm" style={{ borderRadius: "12px", background: "#f8f9fa" }}>
+        <h6 className="fw-semibold mb-2">Delivery Address</h6>
+        <p className="mb-1 small">{address.fullName} • {address.mobileNumber}</p>
+        <p className="mb-1 small">
+            {address.houseNo}, {address.flatOrBuilding && `${address.flatOrBuilding}, `}{address.locality}
+        </p>
+        <p className="mb-1 small">
+            {address.landmark && `Near ${address.landmark}, `}{address.district}, {address.state} - {address.pincode}
+        </p>
+        <span className="badge bg-dark">{address.addressType}</span>
+    </div>
+)}
         </div>
     );
 }

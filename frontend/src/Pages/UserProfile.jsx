@@ -1,16 +1,12 @@
-import Footer from "../Components/Footer";
+import { useContext } from "react";
+import GiftCardContext from "../Context/GiftCardContext";
 export default function UserProfile() {
+  const { placedOrders } = useContext(GiftCardContext);
     const user = {
         name: "Gourav Sharma",
         email: "gouravsharma20a@gmail.com",
         address: "Sector X/A, House No. XXXX, Vasundhara, Ghaziabad 201012",
     };
-
-    const orderHistory = [
-        "Amazon Pay E-Gift Card",
-        "Flipkart E-Gift Card",
-        "Myntra E-Gift Card",
-    ];
 
     return (
         <div className="container py-4" style={{ maxWidth: "500px" }}>
@@ -47,11 +43,11 @@ export default function UserProfile() {
                     <h6 className="text-muted text-uppercase small fw-bold mb-3">
                         Order History
                     </h6>
-                    {orderHistory.length === 0 ? (
+                    {placedOrders.length === 0 ? (
                         <p className="text-muted small mb-0">No orders yet</p>
                     ) : (
                         <ul className="list-unstyled mb-0 d-flex flex-column gap-2">
-                            {orderHistory.map((order, index) => (
+                            {placedOrders.map((order, index) => (
                                 <li
                                     key={index}
                                     className="d-flex align-items-center gap-2"
@@ -60,14 +56,13 @@ export default function UserProfile() {
                                         className="rounded-circle bg-light"
                                         style={{ width: "6px", height: "6px" }}
                                     ></span>
-                                    {order}
+                                    {order.giftCardTitle}
                                 </li>
                             ))}
                         </ul>
                     )}
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 }

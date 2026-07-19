@@ -5,21 +5,34 @@ import { useNavigate } from "react-router-dom";
 
 import { toast } from 'react-toastify';
 
-export default function AdressPage() {
-  const navigate = useNavigate()
-  const { loading } = useContext(GiftCardContext);
 
-  const [address, setAddress] = useState({
-    fullName: "",
-    mobileNumber: "",
-    pincode: "",
-    locality: "",
-    houseNumber: "",
-    landmark: "",
-    district: "",
-    state: "",
-    addressType: "Home",
-  });
+
+
+
+export default function AdressPage() {
+  const { address, setAddress } = useContext(GiftCardContext);
+//   const [address, setAddress] = useState({
+//   fullName: "",
+//   mobileNumber: "",
+//   locality: "",
+//   houseNo: "",
+//   landmark: "",
+//   pincode: "",
+//   district: "",
+//   state: "",
+//   addressType: "",
+// });
+  const {loading} = useContext(GiftCardContext) 
+  const navigate = useNavigate()
+
+  const user = {
+        _id:"6a51ed5b39587a2d83b6b59b",
+        name: "Gourav Sharma",
+        email: "gouravsharma20a@gmail.com",
+        address: []
+    };
+
+  
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -30,7 +43,7 @@ export default function AdressPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4426/user/6a51ed5b39587a2d83b6b59b/newAdress", {
+      const response = await fetch(`https://viii-major-project-backend.vercel.app/user/${user._id}/newAdress`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(address),
@@ -42,6 +55,8 @@ export default function AdressPage() {
       }
     } catch (err) {
       console.log(err);
+      toast.error("Something went wrong, please try again");
+      return
     }
 
     toast.success("adress saved to database successfully")
@@ -51,6 +66,7 @@ export default function AdressPage() {
     navigate("/cart");
 
     console.log("Address to save:", address);
+    
   }
 
   return (
@@ -70,7 +86,7 @@ export default function AdressPage() {
                 id="fullName"
                 value={address.fullName}
                 onChange={handleChange}
-                placeholder="Enter your full name"
+                placeholder="Flat / building name"
               />
             </div>
             <div className="col-md-5">
@@ -109,8 +125,8 @@ export default function AdressPage() {
               <input
                 type="text"
                 className="form-control"
-                id="houseNumber"
-                value={address.houseNumber}
+                id="houseNo"
+                value={address.houseNo}
                 onChange={handleChange}
                 placeholder="Flat / building name"
               />
@@ -190,7 +206,9 @@ export default function AdressPage() {
           <button type="submit" className="btn btn-dark w-100 py-2" disabled={loading}>
             {loading ? "Saving..." : "Save Address"}
           </button>
+          
         </form>
+        
       </div>
     </div>
   );
