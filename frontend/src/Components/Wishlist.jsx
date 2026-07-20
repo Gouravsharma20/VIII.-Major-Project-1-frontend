@@ -1,9 +1,12 @@
 import { useContext } from "react"
 import GiftCardContext from "../Context/GiftCardContext"
+import { toast } from 'react-toastify';
+
 
 import deleteIcon from "../Assets/delete.svg"
 
 import { useNavigate } from "react-router-dom"
+
 
 export default function Wishlist(){
     const {wishList, removeFromWishList, setProductDetail, addToCart } = useContext(GiftCardContext)
@@ -15,6 +18,7 @@ export default function Wishlist(){
 
     async function handleDelete(itemId) {
         removeFromWishList(itemId)
+        toast.info("gift card removed from wishlist successfully !")
     }
 
     const navigate = useNavigate()

@@ -75,19 +75,6 @@ import AdressList from './Pages/AdressList.jsx';
       setSelectedAdress(addressId)
     }
 
-//     const [address, setAddress] = useState([{
-//     fullName: "",
-//     mobileNumber: "",
-//     pincode: "",
-//     locality: "",
-//     houseNo: "",          
-//     flatOrBuilding: "", 
-//     landmark: "",
-//     district: "",
-//     state: "",
-//     addressType: "Home",
-//     isDefault: false,   
-// }]);
 
     useEffect(()=>{
           const fetchGiftCards = async () => {
@@ -160,6 +147,8 @@ import AdressList from './Pages/AdressList.jsx';
       
       function removeFromWishList(itemId){
         setWishList((prev)=>prev.filter(item=>item._id !== itemId))
+        
+
       }
 
       function removeFromCart(itemId){
