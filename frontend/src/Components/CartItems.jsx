@@ -11,8 +11,10 @@ import { toast } from 'react-toastify';
 import wishlistIcon from "../Assets/wishlist.svg"
 
 export default function CartItems() {
-    const { cart, removeFromCart, setProductDetail, addToWishList, setCart, setPlacedOrders,address} = useContext(GiftCardContext);
+    const { cart, removeFromCart, setProductDetail, addToWishList, setCart, setPlacedOrders,address,selectedAdress} = useContext(GiftCardContext);
     const navigate = useNavigate();
+
+    const selectedAddressObj = address?.find((a) => a._id === selectedAdress);
 
     function handleDelete(itemId) {
         removeFromCart(itemId);
@@ -25,11 +27,15 @@ export default function CartItems() {
 
     async function handleProceedToPayment(event) {
         event.preventDefault()
+        if (!selectedAddressObj) {
+            toast.error("Please select a delivery address before proceeding");
+            return;
+        }
         try {
             const response = await fetch("https://viii-major-project-backend.vercel.app/order/UserOrder", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cart, totalAmount })
+                body: JSON.stringify({ cart, totalAmount,address: selectedAddressObj })
             })
 
             const data = await response.json()
@@ -193,13 +199,9 @@ export default function CartItems() {
                 <h5 className="mb-0">Total: ₹{totalAmount}</h5>
 
 
-                {/* <Link className="btn btn-outline-dark btn" to={"/adress"}>
-                     Add Delivery Address
-                </Link> */}
 
 
-
-                {address?.fullName ? (<Link className="btn btn-outline-dark btn" to={"/adresslist"}>
+                {address && address.length > 0 ? (<Link className="btn btn-outline-dark btn" to={"/adresslist"}>
                    Select Delivery Address
                 </Link> )  : (<Link className="btn btn-outline-dark btn" to={"/adress"}>
                      Add Delivery Address
@@ -210,18 +212,19 @@ export default function CartItems() {
                 </button>
             </div>
 
-            {address?.fullName && (
-    <div className="p-3 mt-3 shadow-sm" style={{ borderRadius: "12px", background: "#f8f9fa" }}>
-        <h6 className="fw-semibold mb-2">Delivery Address</h6>
-        <p className="mb-1 small">{address.fullName} • {address.mobileNumber}</p>
+            {selectedAddressObj && (
+                 <div className="p-3 mt-3 shadow-sm" style={{ borderRadius: "12px", background: "#f8f9fa" }}>
+        <h6 className="fw-semibold mb-2">Product will be delivered to</h6>
+        <p className="mb-1 small">{selectedAddressObj.fullName} • {selectedAddressObj.mobileNumber}</p>
         <p className="mb-1 small">
-            {address.houseNo}, {address.flatOrBuilding && `${address.flatOrBuilding}, `}{address.locality}
+            house no {selectedAddressObj.houseNo}, {selectedAddressObj.flatOrBuilding && `${selectedAddressObj.flatOrBuilding}, `}{selectedAddressObj.locality}
         </p>
         <p className="mb-1 small">
-            {address.landmark && `Near ${address.landmark}, `}{address.district}, {address.state} - {address.pincode}
+            {selectedAddressObj.landmark && `Near ${selectedAddressObj.landmark}, `}{selectedAddressObj.district}, {selectedAddressObj.state} - {selectedAddressObj.pincode}
         </p>
-        <span className="badge bg-dark">{address.addressType}</span>
+        <span className="badge bg-dark">{selectedAddressObj.addressType}</span>
     </div>
+   
 )}
         </div>
     );

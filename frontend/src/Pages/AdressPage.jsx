@@ -5,24 +5,25 @@ import { useNavigate } from "react-router-dom";
 
 import { toast } from 'react-toastify';
 
-
-
-
+const initialAdress = {
+  fullName: "",
+  mobileNumber: "",
+  locality: "",
+  houseNo: "",
+  flatOrBuilding: "",
+  landmark: "",
+  pincode: "",
+  district: "",
+  state: "",
+  addressType: "Home",
+  isDefault: false,
+}
 
 export default function AdressPage() {
-  const { address, setAddress } = useContext(GiftCardContext);
-//   const [address, setAddress] = useState({
-//   fullName: "",
-//   mobileNumber: "",
-//   locality: "",
-//   houseNo: "",
-//   landmark: "",
-//   pincode: "",
-//   district: "",
-//   state: "",
-//   addressType: "",
-// });
-  const {loading} = useContext(GiftCardContext) 
+  const {addAddress,loading} = useContext(GiftCardContext);
+
+  const [draft,setDraft] = useState(initialAdress)
+
   const navigate = useNavigate()
 
   const user = {
@@ -36,7 +37,7 @@ export default function AdressPage() {
 
   function handleChange(e) {
     const { id, value } = e.target;
-    setAddress((prev) => ({ ...prev, [id]: value }));
+    setDraft((prev) => ({ ...prev, [id]: value }));
   }
 
   async function SaveAdress(e) {
@@ -46,13 +47,21 @@ export default function AdressPage() {
       const response = await fetch(`https://viii-major-project-backend.vercel.app/user/${user._id}/newAdress`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(address),
+        body: JSON.stringify(draft),
       });
       const data = await response.json();
       if (!response.ok) {
         console.log("Failed to save address:", data.error || data.err);
+        toast.error("Failed to save address");
         return;
       }
+      const backendAddress = data.newAddress || data.address || draft
+      const savedAddress = {
+        ...backendAddress,
+        _id: backendAddress._id || crypto.randomUUID()
+      };
+
+      addAddress(savedAddress)
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong, please try again");
@@ -65,7 +74,7 @@ export default function AdressPage() {
 
     navigate("/cart");
 
-    console.log("Address to save:", address);
+    console.log("Address to save:", draft);
     
   }
 
@@ -84,9 +93,9 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="fullName"
-                value={address.fullName}
+                value ={draft.fullName}
                 onChange={handleChange}
-                placeholder="Flat / building name"
+                placeholder="Full Name"
               />
             </div>
             <div className="col-md-5">
@@ -95,7 +104,7 @@ export default function AdressPage() {
                 type="tel"
                 className="form-control"
                 id="mobileNumber"
-                value={address.mobileNumber}
+                value={draft.mobileNumber}
                 onChange={handleChange}
                 placeholder="10-digit number"
               />
@@ -113,7 +122,7 @@ export default function AdressPage() {
               type="text"
               className="form-control"
               id="locality"
-              value={address.locality}
+              value={draft.locality}
               onChange={handleChange}
               placeholder="Locality / Address / Street"
             />
@@ -126,7 +135,7 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="houseNo"
-                value={address.houseNo}
+                value={draft.houseNo}
                 onChange={handleChange}
                 placeholder="Flat / building name"
               />
@@ -137,7 +146,7 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="landmark"
-                value={address.landmark}
+                value={draft.landmark}
                 onChange={handleChange}
                 placeholder="Nearby landmark (optional)"
               />
@@ -151,7 +160,7 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="pincode"
-                value={address.pincode}
+                value={draft.pincode}
                 onChange={handleChange}
                 placeholder="e.g. 201001"
               />
@@ -162,7 +171,7 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="district"
-                value={address.district}
+                value={draft.district}
                 onChange={handleChange}
                 placeholder="District / City"
               />
@@ -173,7 +182,7 @@ export default function AdressPage() {
                 type="text"
                 className="form-control"
                 id="state"
-                value={address.state}
+                value={draft.state}
                 onChange={handleChange}
                 placeholder="State"
               />
@@ -193,8 +202,8 @@ export default function AdressPage() {
                   name="addressType"
                   id={type.toLowerCase()}
                   value={type}
-                  checked={address.addressType === type}
-                  onChange={() => setAddress((prev) => ({ ...prev, addressType: type }))}
+                  checked={draft.addressType === type}
+                  onChange={() => setDraft((prev) => ({ ...prev, addressType: type }))}
                 />
                 <label className="form-check-label" htmlFor={type.toLowerCase()}>
                   {type}

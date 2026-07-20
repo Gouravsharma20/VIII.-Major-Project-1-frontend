@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
 export default function UserProfile() {
-  const { placedOrders } = useContext(GiftCardContext);
+  const { placedOrders,selectedAdress,address } = useContext(GiftCardContext);
     const user = {
         name: "Gourav Sharma",
         email: "gouravsharma20a@gmail.com",
         address: "Sector X/A, House No. XXXX, Vasundhara, Ghaziabad 201012",
     };
+
+    const deliveryInfo = address?.find((a) => a._id === selectedAdress);
 
     return (
         <div className="container py-4" style={{ maxWidth: "500px" }}>
@@ -14,16 +16,15 @@ export default function UserProfile() {
                 className="card shadow-sm border-0"
                 style={{ borderRadius: "12px", overflow: "hidden" }}
             >
-                {/* Header */}
                 <div className="card-body text-center pt-4 pb-3">
                     <div
                         className="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center mx-auto mb-3"
                         style={{ width: "70px", height: "70px", fontSize: "1.5rem" }}
                     >
-                        {user.name.charAt(0)}
+                        {deliveryInfo.fullName.charAt(0)}
                     </div>
-                    <h5 className="fw-semibold mb-0">{user.name}</h5>
-                    <p className="text-muted small mb-0">{user.email}</p>
+                    <h5 className="fw-semibold mb-0">{deliveryInfo.fullName}</h5>
+                    <p className="text-muted small mb-0">{deliveryInfo.mobileNumber}</p>
                 </div>
 
                 <hr className="m-0" />
@@ -33,7 +34,7 @@ export default function UserProfile() {
                     <h6 className="text-muted text-uppercase small fw-bold mb-2">
                         Delivery Address
                     </h6>
-                    <p className="mb-0">{user.address}</p>
+                    <p className="mb-0">{deliveryInfo.locality} House no : {deliveryInfo.houseNo} {deliveryInfo.flatOrBuilding} near {deliveryInfo.landmark} {deliveryInfo.district} {deliveryInfo.state} {deliveryInfo.pincode}</p>
                 </div>
 
                 <hr className="m-0" />

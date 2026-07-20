@@ -40,7 +40,7 @@ import AdressList from './Pages/AdressList.jsx';
   function App() {
     const [loading,setLoading] = useState(true)
     const [giftcards, setGiftCards] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState("")
+    const [selectedCategory, setSelectedCategory] = useState(null)
     const [cart,setCart] = useState([])
     const [wishList,setWishList] = useState([])
     
@@ -57,19 +57,37 @@ import AdressList from './Pages/AdressList.jsx';
 
     const [productDetail,setProductDetail] = useState([])
 
-    const [address, setAddress] = useState({
-    fullName: "",
-    mobileNumber: "",
-    pincode: "",
-    locality: "",
-    houseNo: "",          
-    flatOrBuilding: "", 
-    landmark: "",
-    district: "",
-    state: "",
-    addressType: "Home",
-    isDefault: false,   
-});
+    const [address, setAddress] = useState([])
+
+    const [selectedAdress,setSelectedAdress] = useState(null)
+
+    function addAddress(newAdress) {
+      setAddress((prev)=>[...prev,newAdress])
+
+    }
+
+    function removeAdress(userId) {
+      setAddress((prev)=>prev.filter((a)=>a._id !== userId))
+      setSelectedAdress((prev)=>(prev === userId ? null : prev))
+    }
+
+    function selectAddress(addressId) {
+      setSelectedAdress(addressId)
+    }
+
+//     const [address, setAddress] = useState([{
+//     fullName: "",
+//     mobileNumber: "",
+//     pincode: "",
+//     locality: "",
+//     houseNo: "",          
+//     flatOrBuilding: "", 
+//     landmark: "",
+//     district: "",
+//     state: "",
+//     addressType: "Home",
+//     isDefault: false,   
+// }]);
 
     useEffect(()=>{
           const fetchGiftCards = async () => {
@@ -200,7 +218,11 @@ import AdressList from './Pages/AdressList.jsx';
         placedOrders,
         setPlacedOrders,
         address,
-        setAddress
+        setAddress,
+        addAddress,
+        removeAdress,
+        selectedAdress,
+        selectAddress
         }}>
       <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
