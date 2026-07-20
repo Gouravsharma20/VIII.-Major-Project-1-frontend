@@ -72,7 +72,7 @@ export default function AdressPage() {
 
 
 
-    navigate("/cart");
+    navigate("/productCheckout");
 
     console.log("Address to save:", draft);
     

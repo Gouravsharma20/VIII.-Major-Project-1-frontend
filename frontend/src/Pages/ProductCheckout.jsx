@@ -26,18 +26,22 @@ export default function ProductCheckout() {
         );
     }
 
-    if (!selectedAddressObj) {
+    if (!address || address.length === 0) {
         return (
             <div className="container text-center text-muted py-5">
-                <p className="fs-5 mb-3">No delivery address selected</p>
-                <Link className="btn btn-outline-dark" to="/adresslist">
-                    Select Delivery Address
+                <p className="fs-5 mb-3">No delivery address Found</p>
+                <Link className="btn btn-outline-dark" to="/adress">
+                    Add Delivery Address
                 </Link>
             </div>
         );
     }
 
     async function handleProceedToPayment() {
+        if (!selectedAddressObj) {
+            toast.error("Please select a delivery address");
+            return;
+        }
         setIsPlacingOrder(true);
         try {
             const response = await fetch("https://viii-major-project-backend.vercel.app/order/UserOrder", {
@@ -103,9 +107,12 @@ export default function ProductCheckout() {
             </div>
 
             {/* Delivery Address */}
+            {/* <Link className="btn btn-outline-dark w-100 w-md-auto mb-3" to={"/adresslist"}>
+                Select Delivery Address
+            </Link> */}
             <div className="card border-0 shadow-sm mb-3" style={{ borderRadius: "12px" }}>
                 <div className="card-body p-3">
-                    <div className="d-flex justify-content-between align-items-start mb-2">
+                    {selectedAddressObj?(<><div className="d-flex justify-content-between align-items-start mb-2">
                         <h6 className="fw-semibold mb-0">Delivery Address</h6>
                         <Link to="/adresslist" className="small">
                             Change
@@ -123,6 +130,9 @@ export default function ProductCheckout() {
                         {selectedAddressObj.district}, {selectedAddressObj.state} - {selectedAddressObj.pincode}
                     </p>
                     <span className="badge bg-dark">{selectedAddressObj.addressType}</span>
+                </>):(<Link to={"/adresslist"} className="text-muted small mb-0">
+                            Please select a delivery address to continue.
+                        </Link>)}
                 </div>
             </div>
 
@@ -154,7 +164,7 @@ export default function ProductCheckout() {
                 <button
                     className="btn btn-success flex-grow-1"
                     onClick={handleProceedToPayment}
-                    disabled={isPlacingOrder}
+                    disabled={isPlacingOrder|| !selectedAddressObj}
                 >
                     {isPlacingOrder ? "Placing Order..." : "Proceed to Payment"}
                 </button>

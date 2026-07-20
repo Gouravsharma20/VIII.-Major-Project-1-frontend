@@ -31,7 +31,7 @@ export default function AdressList() {
                     <p className="mb-1 small">
                         {addr.landmark && `Near ${addr.landmark}, `}{addr.district}, {addr.state} - {addr.pincode}
                     </p>
-                    <Link to={"/cart"}
+                    <Link to={"/productCheckout"}
                         className={`btn btn-sm mt-2 ${selectedAdress === addr._id ? "btn-dark" : "btn-outline-dark"}`}
                         style={{ pointerEvents: loading ? "none" : "auto", opacity: loading ? 0.6 : 1 }}
                         disabled={loading}
