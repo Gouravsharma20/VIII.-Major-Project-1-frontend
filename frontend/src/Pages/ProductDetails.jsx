@@ -127,16 +127,17 @@ export default function ProductDetails() {
     return (
       <>
       {message && <p className="text-success text-center">{message}</p>}
-      <div className="d-flex justify-content-center align-items-center p-2 p-md-5">
+      <div className="d-flex justify-content-center align-items-center p-2 p-md-5"> 
 <div className="card" style={{ width: "45rem", maxWidth: "100%" }}>
+
   <div className="row g-0">
     <div className="col-md-4">
-      <img
-        src={productDetail.giftCardImage}
-        className="img-fluid rounded-top rounded-md-start w-100"
-        style={{ objectFit: "cover", height: "220px" }}
-        alt={productDetail.giftCardTitle}
-      />
+     <img
+     src={productDetail.giftCardImage}
+     className="img-fluid rounded-top rounded-md-start w-100 h-100"
+     style={{ objectFit: "cover", height: "220px" }}
+     alt={productDetail.giftCardTitle}
+/>
       
     </div>
     
