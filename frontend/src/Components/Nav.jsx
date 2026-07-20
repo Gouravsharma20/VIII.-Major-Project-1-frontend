@@ -25,46 +25,87 @@ export default function Navigation() {
   const totalCartQuantity = cart.reduce((total, item) => total + item.quantity, 0)
 
   return (
-    <nav className="navbar bg-body-tertiary">
-      <div className="container-fluid d-flex align-items-center">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
 
-        {/* Left: Brand */}
+        {/* Brand */}
         <Link to="/" className="navbar-brand flex-shrink-0">GiftMart</Link>
 
-        {/* Center: Search */}
-        <form
-          className="d-flex mx-auto"
-          role="search"
-          onSubmit={handleSearch}
-          style={{ width: "100%", maxWidth: "500px" }}
-        >
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search by category"
-            aria-label="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        {/* Mobile-only quick actions (always visible, no need to open menu) */}
+        <div className="d-flex d-lg-none align-items-center gap-2 order-lg-3">
+          <Link className="btn btn-primary btn-sm position-relative" to={"/wishlist"}>
+            ♥
+            {wishList.length > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {wishList.length}
+              </span>
+            )}
+          </Link>
 
-        {/* Right: Actions */}
-        <div className="d-flex align-items-center flex-shrink-0 gap-2">
-          <Link className="btn btn-primary" to={"/wishlist"}>Wishlist ({wishList.length})</Link>
+          <Link className="btn btn-primary btn-sm position-relative" to={"/cart"}>
+            🛒
+            {totalCartQuantity > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {totalCartQuantity}
+              </span>
+            )}
+          </Link>
 
           <img
             src={profile}
             alt="profile"
             onClick={() => navigate("/profile")}
-            style={{
-              width: "35px",
-              height: "35px",
-              cursor: "pointer"
-            }}
+            style={{ width: "32px", height: "32px", cursor: "pointer" }}
           />
 
-          <Link className="btn btn-primary" to={"/cart"}>Cart ({totalCartQuantity})</Link>
+          {/* Toggler for search (collapse) */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle search"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        {/* Collapsible content: search (mobile) + full right side (desktop) */}
+        <div className="collapse navbar-collapse order-lg-2" id="navbarContent">
+
+          {/* Search */}
+          <form
+            className="d-flex mx-auto my-2 my-lg-0"
+            role="search"
+            onSubmit={handleSearch}
+            style={{ width: "100%", maxWidth: "500px" }}
+          >
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search by category"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          {/* Desktop-only actions (hidden on mobile since they're shown above) */}
+          <div className="d-none d-lg-flex align-items-center flex-shrink-0 gap-2 ms-2">
+            <Link className="btn btn-primary" to={"/wishlist"}>Wishlist ({wishList.length})</Link>
+
+            <img
+              src={profile}
+              alt="profile"
+              onClick={() => navigate("/profile")}
+              style={{ width: "35px", height: "35px", cursor: "pointer" }}
+            />
+
+            <Link className="btn btn-primary" to={"/cart"}>Cart ({totalCartQuantity})</Link>
+          </div>
         </div>
 
       </div>
