@@ -18,6 +18,7 @@ export default function CartItems() {
 
     function handleDelete(itemId) {
         removeFromCart(itemId);
+        toast.info("gift card removed from cart !")
     }
 
     function showProductDetailsHandler(card) {
@@ -113,13 +114,35 @@ export default function CartItems() {
                         key={item._id ?? index}
                     >
                         <div className="row g-0">
-                            <div className="col-4 col-md-3 d-flex align-items-center justify-content-center bg-light">
+                            <div className="col-4 col-md-3 position-relative d-flex align-items-center justify-content-center bg-light">
                                 <img
                                     src={item.giftCardImage}
                                     alt={item.giftCardTitle}
                                     className="rounded"
                                     style={{ height: "110px", width: "110px", objectFit: "cover", margin: "12px" }}
                                 />
+                                <button
+        onClick={() => addToWishListHandler(item)}
+        className="btn btn-light rounded-circle shadow position-absolute"
+        style={{
+            top: "8px",
+            right: "8px",
+            width: "42px",
+            height: "42px",
+            padding: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 2
+        }}
+    >
+        <img
+            src={wishlistIcon}
+            alt="Wishlist"
+            width="18"
+            height="18"
+        />
+    </button>
                             </div>
                             <div className="col-8 col-md-9">
                                 <div className="card-body p-3 position-relative">
@@ -135,16 +158,8 @@ export default function CartItems() {
                                         onClick={() => handleDelete(item._id)}
                                     />
 
-                                    <div className="d-flex align-items-center justify-content-center gap-2 pe-4">
-                                        <h5 className="card-title mb-1">{item.giftCardTitle}</h5>
-                                        <img
-                                            src={wishlistIcon}
-                                            width="20"
-                                            height="20"
-                                            style={{ cursor: "pointer", opacity: 0.7 }}
-                                            onClick={() => addToWishListHandler(item)}
-                                            alt="add to wishlist"
-                                        />
+                                    <div className="d-flex align-items-center gap-2 mb-2">
+                                        <h5 className="card-title mb-0">{item.giftCardTitle}</h5>
                                     </div>
 
                                     <p className="card-text text-muted small mb-1">
