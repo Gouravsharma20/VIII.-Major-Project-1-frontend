@@ -30,6 +30,8 @@
 
   import SignUp from './Pages/SignUp.jsx';
 
+  import ProductCheckout from './Pages/ProductCheckout.jsx';
+
 import ViewOrders from './Components/ViewOrders.jsx'
 
 import { toast } from 'react-toastify';
@@ -41,8 +43,24 @@ import AdressList from './Pages/AdressList.jsx';
     const [loading,setLoading] = useState(true)
     const [giftcards, setGiftCards] = useState([])
     const [selectedCategory, setSelectedCategory] = useState(null)
-    const [cart,setCart] = useState([])
-    const [wishList,setWishList] = useState([])
+    const [cart,setCart] = useState(() => {
+    try {
+        const stored = localStorage.getItem("cart");
+        return stored ? JSON.parse(stored) : [];
+    } catch (err) {
+        console.error("Failed to parse cart from localStorage", err);
+        return [];
+    }
+})
+    const [wishList,setWishList] = useState(() => {
+    try {
+        const stored = localStorage.getItem("wishList");
+        return stored ? JSON.parse(stored) : [];
+    } catch (err) {
+        console.error("Failed to parse wishList from localStorage", err);
+        return [];
+    }
+})
     
 
 
@@ -57,9 +75,27 @@ import AdressList from './Pages/AdressList.jsx';
 
     const [productDetail,setProductDetail] = useState([])
 
-    const [address, setAddress] = useState([])
+    const [address, setAddress] = useState(() => {
+    try {
+        const stored = localStorage.getItem("address");
+        return stored ? JSON.parse(stored) : [];
+    } catch (err) {
+        console.error("Failed to parse address from localStorage", err);
+        return [];
+    }
+})
 
-    const [selectedAdress,setSelectedAdress] = useState(null)
+    const [selectedAdress,setSelectedAdress] = useState(() => {
+    try {
+        const stored = localStorage.getItem("selectedAdress");
+        return stored ? JSON.parse(stored) : null;
+    } catch (err) {
+        console.error("Failed to parse selectedAdress from localStorage", err);
+        return null;
+    }
+})
+
+    const [allCategories, setAllCategories] = useState([])
 
     function addAddress(newAdress) {
       setAddress((prev)=>[...prev,newAdress])
@@ -99,6 +135,22 @@ import AdressList from './Pages/AdressList.jsx';
           }
           fetchGiftCards()
       },[selectedCategory])
+
+
+      useEffect(() => {
+    const fetchAllCategories = async () => {
+      try {
+        const response = await fetch("https://viii-major-project-backend.vercel.app/card/allgiftCards")
+        const data = await response.json()
+        const cards = data.giftCards || []
+        const cats = [...new Set(cards.map(card => card.giftCardCategory))]
+        setAllCategories(cats)
+      } catch (err) {
+        console.log("error fetching categories", err)
+      }
+    }
+    fetchAllCategories()
+  }, [])
 
       const categories = [...new Set(giftcards.map((card)=>card.giftCardCategory))]
 
@@ -177,7 +229,27 @@ import AdressList from './Pages/AdressList.jsx';
         setWishList((prev) => [...prev, card])
 
         toast.success(`${card.giftCardTitle} added to the wishlist successfuly!`)
+      
     }
+
+    useEffect(() => {
+      localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // 2️⃣ Wishlist persistence
+  useEffect(() => {
+      localStorage.setItem("wishList", JSON.stringify(wishList));
+  }, [wishList]);
+
+  // 3️⃣ Address list persistence
+  useEffect(() => {
+      localStorage.setItem("address", JSON.stringify(address));
+  }, [address]);
+
+  // 4️⃣ Selected address persistence
+  useEffect(() => {
+      localStorage.setItem("selectedAdress", JSON.stringify(selectedAdress));
+  }, [selectedAdress]);
 
     return (
       <BookContext.Provider value={{
@@ -211,7 +283,8 @@ import AdressList from './Pages/AdressList.jsx';
         addAddress,
         removeAdress,
         selectedAdress,
-        selectAddress
+        selectAddress,
+        allCategories
         }}>
       <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
@@ -233,6 +306,7 @@ import AdressList from './Pages/AdressList.jsx';
         <Route path='/profile' element={<UserProfile/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/adresslist' element={<AdressList/>}/>
+        <Route path='/productCheckout' element={<ProductCheckout/>}/>
       </Routes>
       </main>
       <Footer/>

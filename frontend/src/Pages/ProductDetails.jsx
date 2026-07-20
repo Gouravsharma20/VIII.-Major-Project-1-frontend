@@ -66,15 +66,25 @@
           <li className="list-group-item">Card:{productDetail.giftCardNumber}</li>
           <li className="list-group-item">Pin:{productDetail.giftCardPin}</li>
           <li className="list-group-item">Type:{productDetail.redemptionType}</li>
-          <li className="list-group-item">Expiry:{productDetail.giftCardexpiryDate}</li>
+          <li className="list-group-item">
+  Expiry: {new Date(productDetail.giftCardexpiryDate).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  })}
+</li>
           <li className="list-group-item">Balance:{productDetail.giftCardBalance}</li>
         </ul>
 
         <div className="card-body">
           
-          <button className="btn btn-success" onClick={() => addToCardHandler(productDetail)} className="card-link">
-            Add to Cart
-          </button>
+          <button
+  className="btn btn-success card-link d-flex align-items-center justify-content-center gap-2 px-4 py-2 fw-semibold"
+  onClick={() => addToCardHandler(productDetail)}
+>
+  <i className="bi bi-cart-plus"></i>
+  Add to Cart
+</button>
         </div>
       </div>
     </div>

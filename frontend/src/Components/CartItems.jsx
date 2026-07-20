@@ -26,36 +26,47 @@ export default function CartItems() {
         navigate("/productDetails");
     }
 
-    async function handleProceedToPayment(event) {
+    function ProceedToCheckout() {
         event.preventDefault()
         if (!selectedAddressObj) {
             toast.error("Please select a delivery address before proceeding");
             return;
+        } else {
+            navigate("/productCheckout")
         }
-        try {
-            const response = await fetch("https://viii-major-project-backend.vercel.app/order/UserOrder", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cart, totalAmount,address: selectedAddressObj })
-            })
-
-            const data = await response.json()
-
-            if (!response.ok) {
-                console.log("Order failed:", data.error || data.err);
-                return;
-            }
-
-            setPlacedOrders((prev) => [...prev, ...cart]);
-
-            setCart([]);
-
-            navigate("/success");
-
-        } catch (err) {
-            console.log(err)
-        }
+        
     }
+
+    // async function handleProceedToPayment(event) {
+    //     event.preventDefault()
+    //     if (!selectedAddressObj) {
+    //         toast.error("Please select a delivery address before proceeding");
+    //         return;
+    //     }
+    //     try {
+    //         const response = await fetch("https://viii-major-project-backend.vercel.app/order/UserOrder", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({ cart, totalAmount,address: selectedAddressObj })
+    //         })
+
+    //         const data = await response.json()
+
+    //         if (!response.ok) {
+    //             console.log("Order failed:", data.error || data.err);
+    //             return;
+    //         }
+
+    //         setPlacedOrders((prev) => [...prev, ...cart]);
+
+    //         setCart([]);
+
+    //         navigate("/success");
+
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     function addToWishListHandler(card) {
         addToWishList(card)
@@ -222,8 +233,8 @@ export default function CartItems() {
                      Add Delivery Address
                 </Link>)}
                 
-                <button className="btn btn-success px-4" onClick={handleProceedToPayment}>
-                    Proceed to Payment
+                <button className="btn btn-success px-4" onClick={ProceedToCheckout}>
+                    Proceed to Chekout
                 </button>
             </div>
 

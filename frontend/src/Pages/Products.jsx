@@ -6,7 +6,7 @@ import wishlistIcon from "../Assets/wishlist.svg"
 import "./Product.css"
 
 export default function Products() {
-    const {giftcards,setSelectedCategory,searchedCard,searchError,loading,setProductDetail,addToCart,addToWishList,clearSearch,categories} = useContext(GiftCardContext)
+    const {giftcards,setSelectedCategory,searchedCard,searchError,loading,setProductDetail,addToCart,addToWishList,clearSearch,allCategories} = useContext(GiftCardContext)
     const [sortBy,setSortBy] = useState(null)
     const [ratingFilter, setRatingFilter] = useState(null);
     const {category} = useParams()
@@ -29,6 +29,10 @@ export default function Products() {
       setProductDetail(card)
       navigate("/productDetails")
     }
+
+    function selectCategoryHandler(cat) {
+  navigate(`/product/${cat}`)
+}
 
     const baseCards = searchedCard ? searchedCard : giftcards
     let cardsToShow = [...baseCards];
@@ -126,6 +130,23 @@ export default function Products() {
                     <label className="form-check-label" htmlFor="highToLow">Price: High to Low</label>
                   </div>
                 </div>
+
+
+                <div className="filter-section">
+                  <p className="filter-section-title">Filter By Category</p>
+
+                  {allCategories && allCategories.map((cat)=>{
+                    return (
+                      <div className="form-check" key={cat}>
+                    <input className="form-check-input" type="radio" name="categorySort" id={cat} checked={category === cat} onClick={()=>selectCategoryHandler(cat)} />
+                    <label className="form-check-label" htmlFor="lowToHigh">{cat}</label>
+                  </div>
+                    )
+                  })}
+
+                  
+                </div>
+
 
               </div>
             </div>
