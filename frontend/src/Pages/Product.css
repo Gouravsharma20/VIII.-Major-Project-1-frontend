@@ -27,14 +27,14 @@
 }
 
 .filter-section {
-  margin-bottom: 34px;
+  margin-bottom: 16px;
 }
 
 .filter-section-title {
   text-align: center;
   font-weight: 700;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* ===== Radio / checkbox rows ===== */
@@ -42,13 +42,13 @@
 .filter-options {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 6px;
 }
 
 
 .filter-options .form-check {
   display: fit-content;
-  margin: 12px auto;
+  margin: 6px auto;
   display: flex;
   align-items: center;
   gap: 10px;
