@@ -199,7 +199,7 @@ export default function CartItems() {
                 </div>
             </div>
 
-            {selectedAddressObj && (
+            {/* {selectedAddressObj && (
                  <div className="p-3 mt-3 shadow-sm" style={{ borderRadius: "12px", background: "#f8f9fa" }}>
         <h6 className="fw-semibold mb-2">Product will be delivered to</h6>
         <p className="mb-1 small">{selectedAddressObj.fullName} • {selectedAddressObj.mobileNumber}</p>
@@ -212,7 +212,7 @@ export default function CartItems() {
         <span className="badge bg-dark">{selectedAddressObj.addressType}</span>
     </div>
    
-)}
+)} */}
         </div>
     );
 }
