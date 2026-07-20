@@ -41,10 +41,24 @@
           style={{ objectFit: "cover" }}
           alt={productDetail.giftCardTitle}
         />
+        
       </div>
+      
       <div className="col-md-8">
         <div className="card-body">
-          <h5 className="card-title">{productDetail.giftCardTitle}</h5>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h5 className="card-title mb-0">
+              {productDetail.giftCardTitle}
+            </h5>
+            <img
+            src={wishlistIcon}
+            alt="Wishlist"
+            height="30"
+            width="30"
+            style={{ cursor: "pointer" }}
+            onClick={() => addToWishListHandler(productDetail)}
+            />
+          </div>
           <p className="card-text">{productDetail.redemptionTerms}</p>
         </div>
 
@@ -57,13 +71,7 @@
         </ul>
 
         <div className="card-body">
-          <img
-            src={wishlistIcon}
-            height="30"
-            width="30"
-            style={{ cursor: "pointer" }}
-            onClick={() => addToWishListHandler(productDetail)}
-          />
+          
           <button className="btn btn-success" onClick={() => addToCardHandler(productDetail)} className="card-link">
             Add to Cart
           </button>
