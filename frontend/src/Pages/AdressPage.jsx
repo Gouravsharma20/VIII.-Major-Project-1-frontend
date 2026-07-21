@@ -20,18 +20,13 @@ const initialAdress = {
 }
 
 export default function AdressPage() {
-  const {addAddress,loading} = useContext(GiftCardContext);
+  const {addAddress,loading,user} = useContext(GiftCardContext);
 
   const [draft,setDraft] = useState(initialAdress)
 
   const navigate = useNavigate()
 
-  const user = {
-        _id:"6a51ed5b39587a2d83b6b59b",
-        name: "Gourav Sharma",
-        email: "gouravsharma20a@gmail.com",
-        address: []
-    };
+  
 
   
 
@@ -55,11 +50,16 @@ export default function AdressPage() {
         toast.error("Failed to save address");
         return;
       }
-      const backendAddress = data.newAddress || data.address || draft
-      const savedAddress = {
-        ...backendAddress,
-        _id: backendAddress._id || crypto.randomUUID()
-      };
+
+      const backendAddress = data.addedAdress?.addresses?.at(-1) || draft
+      const savedAddress = { ...backendAddress, _id: backendAddress._id };
+
+
+      // const backendAddress = data.newAddress || data.address || draft
+      // const savedAddress = {
+      //   ...backendAddress,
+      //   _id: backendAddress._id || crypto.randomUUID()
+      // };
 
       addAddress(savedAddress)
     } catch (err) {

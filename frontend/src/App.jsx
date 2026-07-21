@@ -97,19 +97,96 @@ import AdressList from './Pages/AdressList.jsx';
 
     const [allCategories, setAllCategories] = useState([])
 
+    const [user] = useState({
+    _id: "6a51ed5b39587a2d83b6b59b",
+    name: "Gourav Sharma",
+    email: "gouravsharma20a@gmail.com",
+  })
+
+
     function addAddress(newAdress) {
       setAddress((prev)=>[...prev,newAdress])
-
     }
 
-    function removeAdress(userId) {
-      setAddress((prev)=>prev.filter((a)=>a._id !== userId))
-      setSelectedAdress((prev)=>(prev === userId ? null : prev))
+    async function removeAdress(addressId) {
+    try {
+      setLoading(true)
+      const response = await fetch(
+        `https://viii-major-project-backend.vercel.app/user/${user._id}/deleteUser`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ addressId })
+        }
+      )
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.error || data.message || "Failed to delete address")
+      }
+
+      setAddress((prev) => prev.filter((a) => a._id !== addressId))
+      setSelectedAdress((prev) => (prev === addressId ? null : prev))
+      toast.success("Address deleted successfully")
+      return data
+    } catch (err) {
+      console.error(err)
+      toast.error("Failed to delete address")
+      throw err
+    } finally {
+      setLoading(false)
     }
+  }
+
+
+    // function removeAdress(userId) {
+    //   setAddress((prev)=>prev.filter((a)=>a._id !== userId))
+    //   setSelectedAdress((prev)=>(prev === userId ? null : prev))
+    // }
 
     function selectAddress(addressId) {
       setSelectedAdress(addressId)
     }
+
+    async function editAdress(userId,updatedAddress) {
+      try {
+      setLoading(true)
+      const response = await fetch(
+        `https://viii-major-project-backend.vercel.app/user/${userId}/editAdress`,
+        {
+          method: "PATCH",
+          headers : {
+            "content-Type":"application/json"
+          },body: JSON.stringify(updatedAddress)
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+      throw new Error(data.message || "Failed to update address");
+    }
+    return data
+    } catch(err) {
+      console.error(err);
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    async function fetchUserAddresses() {
+      try {
+        const response = await fetch(`https://viii-major-project-backend.vercel.app/user/${user._id}`)
+        const data = await response.json()
+        if (response.ok) {
+          setAddress(data.User?.addresses || [])
+        }
+      } catch (err) {
+        console.log("failed to fetch user addresses", err)
+      }
+    }
+    fetchUserAddresses()
+  }, [])
+
 
 
     useEffect(()=>{
@@ -236,17 +313,17 @@ import AdressList from './Pages/AdressList.jsx';
       localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // 2️⃣ Wishlist persistence
+  
   useEffect(() => {
       localStorage.setItem("wishList", JSON.stringify(wishList));
   }, [wishList]);
 
-  // 3️⃣ Address list persistence
+ 
   useEffect(() => {
       localStorage.setItem("address", JSON.stringify(address));
   }, [address]);
 
-  // 4️⃣ Selected address persistence
+  
   useEffect(() => {
       localStorage.setItem("selectedAdress", JSON.stringify(selectedAdress));
   }, [selectedAdress]);
@@ -284,7 +361,9 @@ import AdressList from './Pages/AdressList.jsx';
         removeAdress,
         selectedAdress,
         selectAddress,
-        allCategories
+        allCategories,
+        editAdress,
+        user
         }}>
       <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
