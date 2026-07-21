@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import GiftCardContext from "../Context/GiftCardContext";
+import { Link } from "react-router-dom";
 export default function UserProfile() {
   const { placedOrders,selectedAdress,address } = useContext(GiftCardContext);
     const user = {
@@ -22,9 +23,9 @@ export default function UserProfile() {
                         className="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center mx-auto mb-3"
                         style={{ width: "70px", height: "70px", fontSize: "1.5rem" }}
                     >
-                        {deliveryInfo.fullName.charAt(0)}
+                        {deliveryInfo.fullName.charAt(0).toUpperCase()}
                     </div>
-                    <h5 className="fw-semibold mb-0">{deliveryInfo.fullName}</h5>
+                    <h5 className="fw-semibold mb-0">{deliveryInfo.fullName.charAt(0).toUpperCase() + deliveryInfo.fullName.slice(1)}</h5>
                     <p className="text-muted small mb-0">{deliveryInfo.mobileNumber}</p>
                 </div>
 
@@ -35,7 +36,8 @@ export default function UserProfile() {
                     <h6 className="text-muted text-uppercase small fw-bold mb-2">
                         Delivery Address
                     </h6>
-                    <p className="mb-0">{deliveryInfo.locality} House no : {deliveryInfo.houseNo} {deliveryInfo.flatOrBuilding} near {deliveryInfo.landmark} {deliveryInfo.district} {deliveryInfo.state} {deliveryInfo.pincode}</p>
+
+                    <p className="mb-0">{deliveryInfo.locality.charAt(0).toUpperCase() + deliveryInfo.locality.slice(1)} House no : {deliveryInfo.houseNo.charAt(0).toUpperCase() + deliveryInfo.houseNo.slice(1)} {deliveryInfo.flatOrBuilding.charAt(0).toUpperCase() + deliveryInfo.flatOrBuilding.slice(1)} Near {deliveryInfo.landmark.charAt(0).toUpperCase() + deliveryInfo.landmark.slice(1)} {deliveryInfo.district.charAt(0).toUpperCase() + deliveryInfo.district.slice(1)} {deliveryInfo.state.charAt(0).toUpperCase() + deliveryInfo.state.slice(1)} {deliveryInfo.pincode}</p>
                 </div>
 
                 <hr className="m-0" />
@@ -58,7 +60,7 @@ export default function UserProfile() {
                                         className="rounded-circle bg-light"
                                         style={{ width: "6px", height: "6px" }}
                                     ></span>
-                                    {order.giftCardTitle}
+                                    {order.giftCardTitle.charAt(0).toUpperCase() + order.giftCardTitle.slice(1)}
                                 </li>
                             ))}
                         </ul>
@@ -118,7 +120,15 @@ export default function UserProfile() {
                     )}
                 </div>
             </div>
-        </div>}</>
+            <Link className="btn btn-dark btn-sm mt-4 p-2"
+        to={"/adress"}
+        >
+            Add New Delivery adress
+        </Link>
+
+        </div>}
+        
+        </>
         
      
     );

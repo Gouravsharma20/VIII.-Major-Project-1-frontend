@@ -139,7 +139,7 @@ export default function Products() {
                     return (
                       <div className="form-check" key={cat}>
                     <input className="form-check-input" type="radio" name="categorySort" id={cat} checked={category === cat} onClick={()=>selectCategoryHandler(cat)} />
-                    <label className="form-check-label" htmlFor="lowToHigh">{cat.toUpperCase()}</label>
+                    <label className="form-check-label" htmlFor="lowToHigh">{cat.charAt(0).toUpperCase() + cat.slice(1)}</label>
                   </div>
                     )
                   })}

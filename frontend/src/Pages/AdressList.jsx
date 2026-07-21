@@ -87,14 +87,23 @@ export default function AdressList() {
                     {editingId === addr._id ? (
                         <div className="d-flex flex-column gap-2">
                             <h6 className="fw-semibold mb-2">Edit Address</h6>
+                            <label className="form-label small mb-0">Full name</label>
                             <input className="form-control form-control-sm" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full name" />
+                            <label className="form-label small mb-0">Mobile number</label>
                             <input className="form-control form-control-sm" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} placeholder="Mobile number" />
+                            <label className="form-label small mb-0">House no.</label>
                             <input className="form-control form-control-sm" name="houseNo" value={formData.houseNo} onChange={handleChange} placeholder="House no." />
+                            <label className="form-label small mb-0">Flat / Building</label>
                             <input className="form-control form-control-sm" name="flatOrBuilding" value={formData.flatOrBuilding} onChange={handleChange} placeholder="Flat / Building" />
+                            <label className="form-label small mb-0">Locality</label>
                             <input className="form-control form-control-sm" name="locality" value={formData.locality} onChange={handleChange} placeholder="Locality" />
+                            <label className="form-label small mb-0">Landmark</label>
                             <input className="form-control form-control-sm" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" />
+                            <label className="form-label small mb-0">District</label>
                             <input className="form-control form-control-sm" name="district" value={formData.district} onChange={handleChange} placeholder="District" />
+                            <label className="form-label small mb-0">State</label>
                             <input className="form-control form-control-sm" name="state" value={formData.state} onChange={handleChange} placeholder="State" />
+                            <label className="form-label small mb-0">Pincode</label>
                             <input className="form-control form-control-sm" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" />
 
                             <div className="d-flex gap-2 mt-2">

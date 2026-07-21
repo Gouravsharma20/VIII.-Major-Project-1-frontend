@@ -93,7 +93,7 @@ export default function Home() {
                 </div>
 
                 <div className="gc-card-body">
-                  <h5 className="gc-card-title" title={cat}>{cat}</h5>
+                  <h5 className="gc-card-title" title={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</h5>
                   <span className="gc-card-cta">
                     Shop Now <span className="gc-arrow">→</span>
                   </span>

@@ -119,15 +119,15 @@ export default function ProductCheckout() {
                         </Link>
                     </div>
                     <p className="mb-1 small">
-                        {selectedAddressObj.fullName} • {selectedAddressObj.mobileNumber}
+                        {selectedAddressObj.fullName.charAt(0).toUpperCase() + selectedAddressObj.fullName.slice(1)} • {selectedAddressObj.mobileNumber}
                     </p>
                     <p className="mb-1 small text-muted">
-                        House no {selectedAddressObj.houseNo}
-                        {selectedAddressObj.flatOrBuilding && `, ${selectedAddressObj.flatOrBuilding}`}, {selectedAddressObj.locality}
+                        House no {selectedAddressObj.houseNo.charAt(0).toUpperCase() + selectedAddressObj.houseNo.slice(1)}
+                        {selectedAddressObj.flatOrBuilding.charAt(0).toUpperCase() + selectedAddressObj.flatOrBuilding.slice(1) && `, ${selectedAddressObj.flatOrBuilding}`}, {selectedAddressObj.locality.charAt(0).toUpperCase() + selectedAddressObj.locality.slice(1)}
                     </p>
                     <p className="mb-2 small text-muted">
-                        {selectedAddressObj.landmark && `Near ${selectedAddressObj.landmark}, `}
-                        {selectedAddressObj.district}, {selectedAddressObj.state} - {selectedAddressObj.pincode}
+                        {selectedAddressObj.landmark.charAt(0).toUpperCase + selectedAddressObj.landmark.slice(1) && `Near ${selectedAddressObj.landmark.charAt(0).toUpperCase + selectedAddressObj.landmark.slice(1)}, `}
+                        {selectedAddressObj.district.charAt(0).toUpperCase() + selectedAddressObj.district.slice(1)}, {selectedAddressObj.state.charAt(0).toUpperCase() + selectedAddressObj.state.slice(1  )} - {selectedAddressObj.pincode}
                     </p>
                     <span className="badge bg-dark">{selectedAddressObj.addressType}</span>
                 </>):(<Link to={"/adresslist"} className="text-muted small mb-0">
