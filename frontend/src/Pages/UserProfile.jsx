@@ -47,6 +47,7 @@ export default function UserProfile() {
                     <h6 className="text-muted text-uppercase small fw-bold mb-3">
                         Order History
                     </h6>
+                    
                     {placedOrders.length === 0 ? (
                         <p className="text-muted small mb-0">No orders yet</p>
                     ) : (
@@ -67,6 +68,11 @@ export default function UserProfile() {
                     )}
                 </div>
             </div>
+            <Link className="btn btn-dark btn-sm mt-4 p-2"
+        to={"/adress"}
+        >
+            Add New Delivery adress
+        </Link>
         </div> :    <div className="container py-4" style={{ maxWidth: "500px" }}>
             <div
                 className="card shadow-sm border-0"
