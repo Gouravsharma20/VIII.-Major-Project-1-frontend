@@ -21,7 +21,7 @@ export default function SuccessPage() {
                 <span style={{ color: "white", fontSize: "40px" }}>✓</span>
             </div>
 
-            <h2 className="mb-2">Product Bought Successfully!</h2>
+            <h2 className="mb-2">Gift card Purchased Successfully!</h2>
             <p className="text-muted mb-4">
                 Thank you for your purchase. Your gift card is on its way.
             </p>

@@ -126,7 +126,7 @@ export default function ProductCheckout() {
                         {selectedAddressObj.flatOrBuilding.charAt(0).toUpperCase() + selectedAddressObj.flatOrBuilding.slice(1) && `, ${selectedAddressObj.flatOrBuilding}`}, {selectedAddressObj.locality.charAt(0).toUpperCase() + selectedAddressObj.locality.slice(1)}
                     </p>
                     <p className="mb-2 small text-muted">
-                        {selectedAddressObj.landmark.charAt(0).toUpperCase + selectedAddressObj.landmark.slice(1) && `Near ${selectedAddressObj.landmark.charAt(0).toUpperCase + selectedAddressObj.landmark.slice(1)}, `}
+                        {selectedAddressObj.landmark.charAt(0).toUpperCase + selectedAddressObj.landmark.slice(1) && `Near ${selectedAddressObj.landmark.charAt(0).toUpperCase() + selectedAddressObj.landmark.slice(1)}, `}
                         {selectedAddressObj.district.charAt(0).toUpperCase() + selectedAddressObj.district.slice(1)}, {selectedAddressObj.state.charAt(0).toUpperCase() + selectedAddressObj.state.slice(1  )} - {selectedAddressObj.pincode}
                     </p>
                     <span className="badge bg-dark">{selectedAddressObj.addressType}</span>

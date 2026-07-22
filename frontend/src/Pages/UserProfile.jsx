@@ -13,7 +13,7 @@ export default function UserProfile() {
 
 
     return (
-        <>{deliveryInfo  ?    <div className="container py-4" style={{ maxWidth: "500px" }}>
+        <>{deliveryInfo  ?<div className="container py-4" style={{ maxWidth: "500px" }}>
             <div
                 className="card shadow-sm border-0"
                 style={{ borderRadius: "12px", overflow: "hidden" }}
