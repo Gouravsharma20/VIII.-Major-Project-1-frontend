@@ -85,7 +85,7 @@ export default function Navigation() {
             <input
               className="form-control me-2"
               type="search"
-              placeholder="Search by product"
+              placeholder="Search by category"
               aria-label="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
